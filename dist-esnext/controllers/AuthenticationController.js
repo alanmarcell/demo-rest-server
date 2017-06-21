@@ -7,7 +7,7 @@ class AuthenticationController {
         // decode token
         if (token) {
             // verifies secret and checks exp
-            jwt.verify(token, 'fcamara', function (err, decoded) {
+            jwt.verify(token, 'fcamara', (err, decoded) => {
                 if (err) {
                     res.json({ success: false, message: 'Failed to authenticate token.' });
                 }

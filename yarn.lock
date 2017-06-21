@@ -27,16 +27,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/graphql-relay@^0.4.2":
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/@types/graphql-relay/-/graphql-relay-0.4.2.tgz#d26bb1e793bb265e4dbcd705f58d42ee84d02d3f"
-  dependencies:
-    "@types/graphql" "*"
-
-"@types/graphql@*":
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.9.1.tgz#b04ebe84bc997cc60dbea2ed4d0d4342c737f99d"
-
 "@types/handlebars@^4.0.31":
   version "4.0.33"
   resolved "https://registry.yarnpkg.com/@types/handlebars/-/handlebars-4.0.33.tgz#ee45696b067e4bdf15c3956710a4c36c17d8f8f0"
@@ -69,7 +59,7 @@
   version "2.2.41"
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.41.tgz#e27cf0817153eb9f2713b2d3f6c68f1e1c3ca608"
 
-"@types/mongodb@*":
+"@types/mongodb@*", "@types/mongodb@^2.2.6":
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-2.2.6.tgz#cd7cb4c439219af1dfba5860d302eeaf2b0a13e4"
   dependencies:
@@ -104,7 +94,7 @@ abbrev@1, abbrev@1.0.x:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.0.9.tgz#91b4792588a7738c25f35dd6f63752a2f8776135"
 
-accepts@^1.3.0, accepts@~1.3.3:
+accepts@~1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.3.tgz#c3ca7434938648c3e0d9c1e328dd68b622c284ca"
   dependencies:
@@ -964,7 +954,7 @@ content-disposition@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.2.tgz#0cf68bb9ddf5f2be7961c3a85178cb85dba78cb4"
 
-content-type@^1.0.2, content-type@~1.0.2:
+content-type@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.2.tgz#b7d113aee7a8dd27bd21133c4dc2529df1721eed"
 
@@ -1225,16 +1215,6 @@ expand-range@^1.8.1:
   resolved "https://registry.yarnpkg.com/expand-range/-/expand-range-1.8.2.tgz#a299effd335fe2721ebae8e257ec79644fc85337"
   dependencies:
     fill-range "^2.1.0"
-
-express-graphql@^0.6.4:
-  version "0.6.6"
-  resolved "https://registry.yarnpkg.com/express-graphql/-/express-graphql-0.6.6.tgz#fdf5c7b5af600b8ef920e4095e03dfc784f9094d"
-  dependencies:
-    accepts "^1.3.0"
-    content-type "^1.0.2"
-    http-errors "^1.3.0"
-    prettier "^1.3.1"
-    raw-body "^2.1.0"
 
 express@^4.15.2:
   version "4.15.3"
@@ -1528,16 +1508,6 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.4, graceful-fs@^4.1.6:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
-graphql-relay@^0.5.1:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/graphql-relay/-/graphql-relay-0.5.2.tgz#40ff714efd60c2cd89e0bcc79e2afa6d87fa8673"
-
-graphql@^0.9.2:
-  version "0.9.6"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.9.6.tgz#514421e9d225c29dfc8fd305459abae58815ef2c"
-  dependencies:
-    iterall "^1.0.0"
-
 growl@1.9.2:
   version "1.9.2"
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.9.2.tgz#0ea7743715db8d8de2c5ede1775e1b45ac85c02f"
@@ -1624,7 +1594,7 @@ hosted-git-info@^2.1.4:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.4.2.tgz#0076b9f46a270506ddbaaea56496897460612a67"
 
-http-errors@^1.3.0, http-errors@~1.6.1:
+http-errors@~1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.6.1.tgz#5f8b8ed98aca545656bf572997387f904a722257"
   dependencies:
@@ -1899,10 +1869,6 @@ istanbul@^0.4.5:
     which "^1.1.1"
     wordwrap "^1.0.0"
 
-iterall@^1.0.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.1.tgz#f7f0af11e9a04ec6426260f5019d9fcca4d50214"
-
 joi@^6.10.1:
   version "6.10.1"
   resolved "https://registry.yarnpkg.com/joi/-/joi-6.10.1.tgz#4d50c318079122000fe5f16af1ff8e1917b77e06"
@@ -2006,10 +1972,6 @@ jws@^3.1.4:
     base64url "^2.0.0"
     jwa "^1.1.4"
     safe-buffer "^5.0.1"
-
-jwt-simple@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/jwt-simple/-/jwt-simple-0.5.1.tgz#79ea01891b61de6b68e13e67c0b4b5bda937b294"
 
 kareem@1.4.1:
   version "1.4.1"
@@ -2299,7 +2261,7 @@ mongodb@2.2.27:
     mongodb-core "2.1.11"
     readable-stream "2.2.7"
 
-mongodb@^2.2.24, mongodb@^2.2.25:
+mongodb@^2.2.25:
   version "2.2.29"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-2.2.29.tgz#36b244126f26766c5ebd6465b8ab5b542d6833c5"
   dependencies:
@@ -2672,10 +2634,6 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-prettier@^1.3.1:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.4.4.tgz#a8d1447b14c9bf67e6d420dcadd10fb9a4fad65a"
-
 private@^0.1.6:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.7.tgz#68ce5e8a1ef0a23bb570cc28537b5332aba63ef1"
@@ -2712,29 +2670,6 @@ ptz-assert@^1.6.3:
     assert "^1.4.1"
     ptz-log "^1.0.0"
 
-ptz-core-app@^1.0.0:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/ptz-core-app/-/ptz-core-app-1.0.6.tgz#601fc4d20100aaaf36c98f1a810d318804dd44ad"
-  dependencies:
-    ptz-core-domain "^1.2.0"
-    ptz-log "^1.0.0"
-
-ptz-core-domain@^1.1.4, ptz-core-domain@^1.2.0, ptz-core-domain@^1.3.3:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/ptz-core-domain/-/ptz-core-domain-1.5.2.tgz#3bd7a4dbefb90cd31e93068c1931dd2dbb729988"
-  dependencies:
-    ptz-core-domain "^1.3.3"
-    ptz-log "^1.1.0"
-    ptz-validations "^1.0.0"
-    shortid "^2.2.6"
-
-ptz-core-repository@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/ptz-core-repository/-/ptz-core-repository-1.0.1.tgz#388a8a225656b5d2e76dd7ec464447aa3077f04a"
-  dependencies:
-    mongodb "^2.2.25"
-    ptz-core-domain "^1.1.4"
-
 ptz-log-file@^1.0.0:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/ptz-log-file/-/ptz-log-file-1.0.5.tgz#d7d093bfba08c27d380e523aa10d35e6e827e9c6"
@@ -2744,51 +2679,11 @@ ptz-log-file@^1.0.0:
     moment "^2.18.1"
     ptz-log "^1.0.0"
 
-ptz-log@^1.0.0, ptz-log@^1.1.0:
+ptz-log@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ptz-log/-/ptz-log-1.1.0.tgz#a5f81680da30e491e49c6a6022ec4972506d473b"
   dependencies:
     moment "^2.18.1"
-
-ptz-menu-domain@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ptz-menu-domain/-/ptz-menu-domain-1.0.0.tgz#2ab320ae2b64f5a1e039006cbff5060ceaebaa58"
-  dependencies:
-    ptz-core-domain "^1.3.3"
-    ptz-log "^1.0.0"
-
-ptz-user-app@^1.2.0:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/ptz-user-app/-/ptz-user-app-1.5.3.tgz#7b91d65cfa1a5152dd6ca87abab8d68c48ef92a9"
-  dependencies:
-    bcryptjs "^2.4.3"
-    dotenv "^4.0.0"
-    jwt-simple "^0.5.1"
-    ptz-core-app "^1.0.0"
-    ptz-log "^1.0.0"
-    ptz-user-domain "^1.8.0"
-
-ptz-user-domain@^1.0.0, ptz-user-domain@^1.2.3, ptz-user-domain@^1.8.0:
-  version "1.8.4"
-  resolved "https://registry.yarnpkg.com/ptz-user-domain/-/ptz-user-domain-1.8.4.tgz#b91b51358c96aa88b6146629000da55ad5d0c95e"
-  dependencies:
-    ptz-core-domain "^1.1.4"
-    ptz-log "^1.0.0"
-
-ptz-user-repository@^1.1.1:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/ptz-user-repository/-/ptz-user-repository-1.1.3.tgz#bb84251cbf9a4dff850581118a70a9f72cd3cdf0"
-  dependencies:
-    mongodb "^2.2.24"
-    ptz-core-repository "^1.0.0"
-    ptz-log "^1.0.0"
-    ptz-user-domain "^1.0.0"
-
-ptz-validations@^1.0.0:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/ptz-validations/-/ptz-validations-1.2.2.tgz#77e2a38c246572ecaf8184ceec9ad0d58b21b398"
-  dependencies:
-    ptz-log "^1.0.0"
 
 punycode@^1.4.1:
   version "1.4.1"
@@ -2817,7 +2712,7 @@ range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
 
-raw-body@^2.1.0, raw-body@~2.2.0:
+raw-body@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/raw-body/-/raw-body-2.2.0.tgz#994976cf6a5096a41162840492f0bdc5d6e7fb96"
   dependencies:
@@ -3125,10 +3020,6 @@ shelljs@^0.7.0:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
-shortid@^2.2.6:
-  version "2.2.8"
-  resolved "https://registry.yarnpkg.com/shortid/-/shortid-2.2.8.tgz#033b117d6a2e975804f6f0969dbe7d3d0b355131"
-
 signal-exit@^2.0.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-2.1.2.tgz#375879b1f92ebc3b334480d038dc546a6d558564"
@@ -3305,7 +3196,7 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
-supports-color@3.1.2:
+supports-color@3.1.2, supports-color@^3.1.0, supports-color@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-3.1.2.tgz#72a262894d9d408b956ca05ff37b2ed8a6e2a2d5"
   dependencies:
@@ -3314,12 +3205,6 @@ supports-color@3.1.2:
 supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
-
-supports-color@^3.1.0, supports-color@^3.1.2:
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-3.2.3.tgz#65ac0504b3954171d8a64946b2ae3cbb8a5f54f6"
-  dependencies:
-    has-flag "^1.0.0"
 
 tar-pack@^3.4.0:
   version "3.4.0"

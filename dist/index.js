@@ -43,13 +43,8 @@ var log = (0, _ptzLogFile2.default)({ dir: './logs' });
 var env = process.env.NODE_ENV || 'developement';
 var app = (0, _express2.default)();
 log('starting server');
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3010;
 app.use((0, _cors2.default)());
-// app.use('/app', express.static(path.resolve(__dirname, '../client/app')));
-// app.use('/libs', express.static(path.resolve(__dirname, '../client/libs')));
-// for system.js to work. Can be removed if bundling.
-// app.use(express.static(path.resolve(__dirname, '../client')));
-// app.use(express.static(path.resolve(__dirname, '../../node_modules')));
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 app.use(_bodyParser2.default.json());
 app.use((0, _morgan2.default)('dev'));
