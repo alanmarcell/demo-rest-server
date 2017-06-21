@@ -1,5 +1,10 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.log = undefined;
+
 var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
@@ -20,7 +25,7 @@ var _morgan = require('morgan');
 
 var _morgan2 = _interopRequireDefault(_morgan);
 
-var _Routes = require('./config/routes/Routes');
+var _Routes = require('./routes/Routes');
 
 var _Routes2 = _interopRequireDefault(_Routes);
 
@@ -34,7 +39,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 // import path from 'path';
 
 
-var log = (0, _ptzLogFile2.default)({ dir: './logs' });
+var log = exports.log = (0, _ptzLogFile2.default)({ dir: './logs' });
 var env = process.env.NODE_ENV || 'developement';
 var app = (0, _express2.default)();
 log('starting server');
@@ -94,7 +99,7 @@ _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
                                         return server.address();
 
                                     case 2:
-                                        console.log('This express server is listening on port:' + PORT);
+                                        log('This express server is listening on port:' + PORT);
 
                                     case 3:
                                     case 'end':

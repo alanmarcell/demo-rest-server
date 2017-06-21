@@ -4,10 +4,10 @@ import express from 'express';
 import http from 'http';
 import morgan from 'morgan';
 // import path from 'path';
-import BaseRoutes from './config/routes/Routes';
+import BaseRoutes from './routes/Routes';
 
 import logFile from 'ptz-log-file';
-const log = logFile({ dir: './logs' });
+export const log = logFile({ dir: './logs' });
 const env: string = process.env.NODE_ENV || 'developement';
 
 const app = express();
@@ -65,7 +65,7 @@ app.use((error: any, res: express.Response) => {
 
     app.listen(PORT, async () => {
       await server.address();
-      console.log('This express server is listening on port:' + PORT);
+      log('This express server is listening on port:' + PORT);
     });
   } catch (e) {
     log(e);
