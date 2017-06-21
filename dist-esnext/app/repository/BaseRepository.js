@@ -16,11 +16,11 @@ class RepositoryBase {
         }
     }
     retrieve(callback, start, items) {
-        if (items)
-            // tslint:disable-next-line:radix
-            this.model.find({}, callback).skip(parseInt(start)).limit(parseInt(items));
-        else
-            this.model.find({}, callback);
+        // if (items)
+        //   // tslint:disable-next-line:radix
+        //   this.model.find({}, callback).skip(parseInt(start)).limit(parseInt(items));
+        // else
+        console.log(this.model.find({}, callback));
     }
     // tslint:disable-next-line:variable-name
     update(_id, item, callback) {

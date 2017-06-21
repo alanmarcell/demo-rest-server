@@ -1,9 +1,5 @@
 'use strict';
 
-var _dotenv = require('dotenv');
-
-var _dotenv2 = _interopRequireDefault(_dotenv);
-
 var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
@@ -35,9 +31,8 @@ var _ptzLogFile2 = _interopRequireDefault(_ptzLogFile);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-_dotenv2.default.config();
 // import path from 'path';
+
 
 var log = (0, _ptzLogFile2.default)({ dir: './logs' });
 var env = process.env.NODE_ENV || 'developement';

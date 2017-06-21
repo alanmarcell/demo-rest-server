@@ -24,12 +24,12 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   }
 
   retrieve(callback: (error: any, result: any) => void, start?: string, items?: string) {
-    if (items)
-      // tslint:disable-next-line:radix
-      this.model.find({}, callback).skip(parseInt(start)).limit(parseInt(items));
+    // if (items)
+    //   // tslint:disable-next-line:radix
+    //   this.model.find({}, callback).skip(parseInt(start)).limit(parseInt(items));
 
-    else
-      this.model.find({}, callback);
+    // else
+      console.log(this.model.find({}, callback));
   }
 
   // tslint:disable-next-line:variable-name

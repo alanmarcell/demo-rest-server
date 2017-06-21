@@ -10,9 +10,7 @@ var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
-var _constants = require('./../../config/constants/constants');
-
-var _constants2 = _interopRequireDefault(_constants);
+var _constants = require('./../../config/constants');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25,9 +23,9 @@ var DataAccess = function () {
             if (this.mongooseInstance) return this.mongooseInstance;
             this.mongooseConnection = _mongoose2.default.connection;
             this.mongooseConnection.once('open', function () {
-                console.log('Connected to mongodb.');
+                console.log('Connected to mongodb url:', _constants.DB_CONNECTION_STRING);
             });
-            this.mongooseInstance = _mongoose2.default.connect(_constants2.default.DB_CONNECTION_STRING);
+            this.mongooseInstance = _mongoose2.default.connect(_constants.DB_CONNECTION_STRING);
             return this.mongooseInstance;
         }
     }]);

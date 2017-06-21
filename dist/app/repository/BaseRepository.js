@@ -36,9 +36,11 @@ var RepositoryBase = function () {
     }, {
         key: 'retrieve',
         value: function retrieve(callback, start, items) {
-            if (items)
-                // tslint:disable-next-line:radix
-                this.model.find({}, callback).skip(parseInt(start)).limit(parseInt(items));else this.model.find({}, callback);
+            // if (items)
+            //   // tslint:disable-next-line:radix
+            //   this.model.find({}, callback).skip(parseInt(start)).limit(parseInt(items));
+            // else
+            console.log(this.model.find({}, callback));
         }
         // tslint:disable-next-line:variable-name
 

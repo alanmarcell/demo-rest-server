@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
 import UserBusiness from './../app/business/UserBusiness';
+import { TOKEN_SECRET } from './../config/constants';
+const expiresIn = 10;
 class AuthenticationController {
     verifyToken(req, res, next) {
         // check header or url parameters or post parameters for token
@@ -7,7 +9,9 @@ class AuthenticationController {
         // decode token
         if (token) {
             // verifies secret and checks exp
-            jwt.verify(token, 'fcamara', (err, decoded) => {
+            console.log(TOKEN_SECRET);
+            console.log(typeof (TOKEN_SECRET));
+            jwt.verify(token, TOKEN_SECRET, (err, decoded) => {
                 if (err) {
                     res.json({ success: false, message: 'Failed to authenticate token.' });
                 }
@@ -28,6 +32,8 @@ class AuthenticationController {
         }
     }
     authenticateUser(req, res) {
+        console.log(TOKEN_SECRET);
+        console.log(typeof (TOKEN_SECRET));
         try {
             const userName = req.body.name;
             const userBusiness = new UserBusiness();
@@ -41,15 +47,15 @@ class AuthenticationController {
                     return res.json({ success: false, message: 'Authentication failed. Wrong password.' });
                 // if user is found and password is right
                 // create a token
-                const token = jwt.sign(user, 'fcamara', {
-                    expiresIn: 1000 // expires in 60 seconds
+                const token = jwt.sign(user, TOKEN_SECRET, {
+                    expiresIn // expires in 60 seconds
                 });
                 // return the information including token as JSON
                 res.json({
                     success: true,
                     message: 'Enjoy your token!',
                     token,
-                    expiresIn: 1000
+                    expiresIn
                 });
             });
         }
