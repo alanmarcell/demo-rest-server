@@ -12,8 +12,6 @@ var _express2 = _interopRequireDefault(_express);
 
 var _AuthenticationController = require('../users/AuthenticationController');
 
-var _AuthenticationController2 = _interopRequireDefault(_AuthenticationController);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23,15 +21,12 @@ var router = _express2.default.Router();
 var AuthenticationRoutes = function () {
     function AuthenticationRoutes() {
         _classCallCheck(this, AuthenticationRoutes);
-
-        this.authenticationController = new _AuthenticationController2.default();
     }
 
     _createClass(AuthenticationRoutes, [{
         key: 'routes',
         get: function get() {
-            var authenticationController = this.authenticationController;
-            router.post('/authenticateUser', authenticationController.authenticateUser);
+            router.post('/authenticateUser', _AuthenticationController.authenticateUser);
             return router;
         }
     }]);

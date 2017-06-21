@@ -1,44 +1,37 @@
-import { IUserBusiness, IUserModel } from './IUser';
+import { IUserModel } from './IUser';
 import UserRepository from './UserRepository';
 
-class UserBusiness implements IUserBusiness {
-  private userRepository: UserRepository;
+const userRepository: UserRepository = new UserRepository();
 
-  constructor() {
-    this.userRepository = new UserRepository();
-  }
-
-  create(user: IUserModel, callback: (error: any, result: any) => void) {
-    this.userRepository.create(user, callback);
-  }
-
-  retrieve(callback: (error: any, result: any) => void) {
-    this.userRepository.retrieve(callback);
-  }
-
-  // tslint:disable-next-line:variable-name
-  update(_id: string, item: IUserModel, callback: (error: any, result: any) => void) {
-
-    this.userRepository.findById(_id, (err, res) => {
-      if (err) callback(err, res);
-      else this.userRepository.update(res._id, item, callback);
-    });
-  }
-
-  // tslint:disable-next-line:variable-name
-  delete(_id: string, callback: (error: any, result: any) => void) {
-    this.userRepository.delete(_id, callback);
-  }
-
-  // tslint:disable-next-line:variable-name
-  findById(_id: string, callback: (error: any, result: IUserModel) => void) {
-    this.userRepository.findById(_id, callback);
-  }
-
-  findOne(name: string, callback: (error: any, result: IUserModel) => void) {
-    this.userRepository.findOne({ name }, callback);
-  }
+function createUser(user: IUserModel, callback: (error: any, result: any) => void) {
+  userRepository.create(user, callback);
 }
 
-Object.seal(UserBusiness);
-export default UserBusiness;
+function retrieveUsers(callback: (error: any, result: any) => void) {
+  userRepository.retrieve(callback);
+}
+
+// tslint:disable-next-line:variable-name
+function updateUser(_id: string, item: IUserModel, callback: (error: any, result: any) => void) {
+
+  userRepository.findById(_id, (err, res) => {
+    if (err) callback(err, res);
+    else userRepository.update(res._id, item, callback);
+  });
+}
+
+// tslint:disable-next-line:variable-name
+function deleteUser(_id: string, callback: (error: any, result: any) => void) {
+  userRepository.delete(_id, callback);
+}
+
+// tslint:disable-next-line:variable-name
+function findUserById(_id: string, callback: (error: any, result: IUserModel) => void) {
+  userRepository.findById(_id, callback);
+}
+
+function findUser(name: string, callback: (error: any, result: IUserModel) => void) {
+  userRepository.findOne({ name }, callback);
+}
+
+export { createUser, findUser, findUserById, deleteUser, updateUser, retrieveUsers };

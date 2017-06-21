@@ -20,8 +20,6 @@ var _ProductRoutes2 = _interopRequireDefault(_ProductRoutes);
 
 var _UserRoutes = require('../routes/UserRoutes');
 
-var _UserRoutes2 = _interopRequireDefault(_UserRoutes);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37,7 +35,7 @@ var Routes = function () {
         key: 'routes',
         get: function get() {
             app.use('/', new _AuthenticationRoutes2.default().routes);
-            app.use('/', new _UserRoutes2.default().routes);
+            app.use('/', (0, _UserRoutes.getUserRoutes)());
             app.use('/', new _ProductRoutes2.default().routes);
             return app;
         }

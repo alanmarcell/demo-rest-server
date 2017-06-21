@@ -1,35 +1,30 @@
 import UserRepository from './UserRepository';
-class UserBusiness {
-    constructor() {
-        this.userRepository = new UserRepository();
-    }
-    create(user, callback) {
-        this.userRepository.create(user, callback);
-    }
-    retrieve(callback) {
-        this.userRepository.retrieve(callback);
-    }
-    // tslint:disable-next-line:variable-name
-    update(_id, item, callback) {
-        this.userRepository.findById(_id, (err, res) => {
-            if (err)
-                callback(err, res);
-            else
-                this.userRepository.update(res._id, item, callback);
-        });
-    }
-    // tslint:disable-next-line:variable-name
-    delete(_id, callback) {
-        this.userRepository.delete(_id, callback);
-    }
-    // tslint:disable-next-line:variable-name
-    findById(_id, callback) {
-        this.userRepository.findById(_id, callback);
-    }
-    findOne(name, callback) {
-        this.userRepository.findOne({ name }, callback);
-    }
+const userRepository = new UserRepository();
+function createUser(user, callback) {
+    userRepository.create(user, callback);
 }
-Object.seal(UserBusiness);
-export default UserBusiness;
+function retrieveUsers(callback) {
+    userRepository.retrieve(callback);
+}
+// tslint:disable-next-line:variable-name
+function updateUser(_id, item, callback) {
+    userRepository.findById(_id, (err, res) => {
+        if (err)
+            callback(err, res);
+        else
+            userRepository.update(res._id, item, callback);
+    });
+}
+// tslint:disable-next-line:variable-name
+function deleteUser(_id, callback) {
+    userRepository.delete(_id, callback);
+}
+// tslint:disable-next-line:variable-name
+function findUserById(_id, callback) {
+    userRepository.findById(_id, callback);
+}
+function findUser(name, callback) {
+    userRepository.findOne({ name }, callback);
+}
+export { createUser, findUser, findUserById, deleteUser, updateUser, retrieveUsers };
 //# sourceMappingURL=UserBusiness.js.map

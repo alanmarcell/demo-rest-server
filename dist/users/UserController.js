@@ -3,113 +3,87 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+exports.findUserById = exports.retrieveUsers = exports.updateUser = exports.deleteUser = exports.findUser = exports.createUser = undefined;
 
 var _index = require('../index');
 
 var _UserBusiness = require('./UserBusiness');
 
-var _UserBusiness2 = _interopRequireDefault(_UserBusiness);
+var UserBusiness = _interopRequireWildcard(_UserBusiness);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var UserController = function () {
-    function UserController() {
-        _classCallCheck(this, UserController);
+function createUser(req, res) {
+    try {
+        var user = req.body;
+        UserBusiness.createUser(user, function (error) {
+            if (error) res.send({ error: 'error' });else res.send({ success: 'success' });
+        });
+    } catch (e) {
+        (0, _index.log)(e);
+        res.send({ error: 'error in your request' });
     }
-
-    _createClass(UserController, [{
-        key: 'create',
-        value: function create(req, res) {
-            try {
-                var user = req.body;
-                var userBusiness = new _UserBusiness2.default();
-                userBusiness.create(user, function (error) {
-                    if (error) res.send({ error: 'error' });else res.send({ success: 'success' });
-                });
-            } catch (e) {
-                (0, _index.log)(e);
-                res.send({ error: 'error in your request' });
-            }
-        }
-    }, {
-        key: 'update',
-        value: function update(req, res) {
-            try {
-                var user = req.body;
-                var id = req.params._id;
-                var userBusiness = new _UserBusiness2.default();
-                userBusiness.update(id, user, function (error) {
-                    if (error) res.send({ error: 'error' });else res.send({ success: 'success' });
-                });
-            } catch (e) {
-                (0, _index.log)(e);
-                res.send({ error: 'error in your request' });
-            }
-        }
-    }, {
-        key: 'delete',
-        value: function _delete(req, res) {
-            try {
-                var id = req.params._id;
-                var userBusiness = new _UserBusiness2.default();
-                userBusiness.delete(id, function (error) {
-                    if (error) res.send({ error: 'error' });else res.send({ success: 'success' });
-                });
-            } catch (e) {
-                (0, _index.log)(e);
-                res.send({ error: 'error in your request' });
-            }
-        }
-    }, {
-        key: 'retrieve',
-        value: function retrieve(req, res) {
-            try {
-                var userBusiness = new _UserBusiness2.default();
-                userBusiness.retrieve(function (error, result) {
-                    if (error) res.send({ error: 'error' + req });else res.send(result);
-                });
-            } catch (e) {
-                (0, _index.log)(e);
-                res.send({ error: 'error in your request' });
-            }
-        }
-    }, {
-        key: 'findById',
-        value: function findById(req, res) {
-            try {
-                var id = req.params._id;
-                var userBusiness = new _UserBusiness2.default();
-                userBusiness.findById(id, function (error, result) {
-                    if (error) res.send({ error: 'error' });else res.send(result);
-                });
-            } catch (e) {
-                (0, _index.log)(e);
-                res.send({ error: 'error in your request' });
-            }
-        }
-    }, {
-        key: 'findOne',
-        value: function findOne(req, res) {
-            try {
-                var param = req.params.param;
-                var userBusiness = new _UserBusiness2.default();
-                userBusiness.findOne(param, function (error, result) {
-                    if (error) res.send({ error: 'error' });else res.send(result);
-                });
-            } catch (e) {
-                (0, _index.log)(e);
-                res.send({ error: 'error in your request' });
-            }
-        }
-    }]);
-
-    return UserController;
-}();
-
-exports.default = UserController;
+}
+function updateUser(req, res) {
+    try {
+        var user = req.body;
+        var id = req.params._id;
+        UserBusiness.updateUser(id, user, function (error) {
+            if (error) res.send({ error: 'error' });else res.send({ success: 'success' });
+        });
+    } catch (e) {
+        (0, _index.log)(e);
+        res.send({ error: 'error in your request' });
+    }
+}
+function deleteUser(req, res) {
+    try {
+        var id = req.params._id;
+        UserBusiness.deleteUser(id, function (error) {
+            if (error) res.send({ error: 'error' });else res.send({ success: 'success' });
+        });
+    } catch (e) {
+        (0, _index.log)(e);
+        res.send({ error: 'error in your request' });
+    }
+}
+function retrieveUsers(req, res) {
+    try {
+        UserBusiness.retrieveUsers(function (error, result) {
+            if (error) res.send({ error: 'error' + req });else res.send(result);
+        });
+    } catch (e) {
+        (0, _index.log)(e);
+        res.send({ error: 'error in your request' });
+    }
+}
+function findUserById(req, res) {
+    try {
+        var id = req.params._id;
+        UserBusiness.findUserById(id, function (error, result) {
+            if (error) res.send({ error: 'error' });else res.send(result);
+        });
+    } catch (e) {
+        (0, _index.log)(e);
+        res.send({ error: 'error in your request' });
+    }
+}
+function findUser(req, res) {
+    try {
+        var param = req.params.param;
+        UserBusiness.findUser(param, function (error, result) {
+            if (error) res.send({ error: error });else res.send(result);
+        });
+    } catch (e) {
+        (0, _index.log)(e);
+        res.send({ error: 'error in your request' });
+    }
+}
+exports.createUser = createUser;
+exports.findUser = findUser;
+exports.deleteUser = deleteUser;
+exports.updateUser = updateUser;
+exports.retrieveUsers = retrieveUsers;
+exports.findUserById = findUserById;
 //# sourceMappingURL=UserController.js.map
 //# sourceMappingURL=UserController.js.map

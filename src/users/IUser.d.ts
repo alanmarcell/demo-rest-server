@@ -13,4 +13,4 @@ interface IUserModel extends mongoose.Document {
 export {
   IUserBusiness,
   IUserModel
-}
+};

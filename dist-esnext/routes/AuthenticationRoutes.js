@@ -1,13 +1,9 @@
 import express from 'express';
-import AuthenticationController from '../users/AuthenticationController';
+import { authenticateUser } from '../users/AuthenticationController';
 const router = express.Router();
 class AuthenticationRoutes {
-    constructor() {
-        this.authenticationController = new AuthenticationController();
-    }
     get routes() {
-        const authenticationController = this.authenticationController;
-        router.post('/authenticateUser', authenticationController.authenticateUser);
+        router.post('/authenticateUser', authenticateUser);
         return router;
     }
 }
