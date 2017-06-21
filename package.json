@@ -1,8 +1,8 @@
 {
-  "name": "h4-server",
+  "name": "demo-server",
   "version": "0.0.0",
   "license": "MIT",
-  "description": "h4-server.",
+  "description": "demo-server.",
   "main": "dist/index.js",
   "typings": "src/index.ts",
   "scripts": {
@@ -22,13 +22,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alanmarcell/h4-server.git"
+    "url": "git+https://github.com/alanmarcell/demo-server.git"
   },
   "author": "github.com/alanmarcell",
   "bugs": {
-    "url": "https://github.com/alanmarcell/h4-server/issues"
+    "url": "https://github.com/alanmarcell/demo-server/issues"
   },
-  "homepage": "https://github.com/alanmarcell/h4-server#readme",
+  "homepage": "https://github.com/alanmarcell/demo-server#readme",
   "devDependencies": {
     "@types/mocha": "^2.2.40",
     "@types/node": "^7.0.12",

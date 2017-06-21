@@ -1,17 +1,16 @@
-# h4-server
+# Demo Server
 
-[![Build Status](https://travis-ci.org/alanmarcell/h4-server.svg)](https://travis-ci.org/alanmarcell/h4-server)
-[![codecov.io](http://codecov.io/github/alanmarcell/h4-server/coverage.svg)](http://codecov.io/github/alanmarcell/h4-server)
-[![Dependency Status](https://gemnasium.com/alanmarcell/h4-server.svg)](https://gemnasium.com/alanmarcell/h4-server)
-[![bitHound Score](https://www.bithound.io/github/gotwarlost/istanbul/badges/score.svg)](https://www.bithound.io/github/alanmarcell/h4-server)
+[![Build Status](https://travis-ci.org/alanmarcell/demo-server.svg)](https://travis-ci.org/alanmarcell/demo-server)
+[![codecov.io](http://codecov.io/github/alanmarcell/demo-server/coverage.svg)](http://codecov.io/github/alanmarcell/demo-server)
+[![Dependency Status](https://gemnasium.com/alanmarcell/demo-server.svg)](https://gemnasium.com/alanmarcell/demo-server)
+[![bitHound Score](https://www.bithound.io/github/gotwarlost/istanbul/badges/score.svg)](https://www.bithound.io/github/alanmarcell/demo-server)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 ## Translations
-[pt-br](https://github.com/alanmarcell/h4server/blob/master/README.pt-br.md)
-[en-us](https://github.com/alanmarcell/h4server/blob/master/README.md)
+[pt-br](https://github.com/alanmarcell/demo-server/blob/master/README.pt-br.md)
+[en-us](https://github.com/alanmarcell/demo-server/blob/master/README.md)
 
-h4-server was made with Polutz
-
+Demo Server was made with Polutz
 
 ## Use
 
