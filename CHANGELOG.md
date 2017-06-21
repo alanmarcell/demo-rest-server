@@ -1,7 +1,5 @@
 ## master
 
-
-
-## 1.0.0 (March 30, 2017)
+## 0.0.0 (June 21, 2017)
 
 * Initial public release.

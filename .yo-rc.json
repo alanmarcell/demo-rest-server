@@ -1,9 +1,0 @@
-{
-  "generator-ptz-graphql": {
-    "promptValues": {
-      "appname": "h4graphql",
-      "githubAuthor": "alanmarcell",
-      "codecovToken": "aa63d374-9f48-4994-b3a7-d9ca080c82a9"
-    }
-  }
-}
