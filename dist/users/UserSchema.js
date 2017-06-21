@@ -8,14 +8,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _DataAccess = require('../core/DataAccess');
 
-var _DataAccess2 = _interopRequireDefault(_DataAccess);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var mongoose = _DataAccess2.default.mongooseInstance;
-var mongooseConnection = _DataAccess2.default.mongooseConnection;
+var mongoose = _DataAccess.mongooseInstance;
 
 var UserSchema = function () {
     function UserSchema() {
@@ -46,7 +41,7 @@ var UserSchema = function () {
     return UserSchema;
 }();
 
-var schema = mongooseConnection.model('Users', UserSchema.schema);
+var schema = _DataAccess.mongooseConnection.model('Users', UserSchema.schema);
 exports.default = schema;
 //# sourceMappingURL=UserSchema.js.map
 //# sourceMappingURL=UserSchema.js.map

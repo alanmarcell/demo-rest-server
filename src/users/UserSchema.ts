@@ -1,8 +1,7 @@
-import DataAccess from '../core/DataAccess';
-import {IUserModel} from './IUser';
+import { mongooseConnection, mongooseInstance } from '../core/DataAccess';
+import { IUserModel } from './IUser';
 
-const mongoose = DataAccess.mongooseInstance;
-const mongooseConnection = DataAccess.mongooseConnection;
+const mongoose = mongooseInstance;
 
 class UserSchema {
 

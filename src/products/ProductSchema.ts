@@ -1,8 +1,8 @@
-import DataAccess from '../core/DataAccess';
+import { mongooseConnection, mongooseInstance } from '../core/DataAccess';
 import { IProductModel } from './IProduct';
 
-const mongoose = DataAccess.mongooseInstance;
-const mongooseConnection = DataAccess.mongooseConnection;
+const mongoose = mongooseInstance;
+// const mongooseConnection = mongooseConnection;
 
 class ProductSchema {
 

@@ -2,25 +2,24 @@ import Mongoose from 'mongoose';
 import { DB_CONNECTION_STRING } from '../config/constants';
 import { log } from '../index';
 
-class DataAccess {
-  static mongooseInstance: any;
-  static mongooseConnection: Mongoose.Connection;
-  static connect(): Mongoose.Connection {
-    if (this.mongooseInstance) return this.mongooseInstance;
+let mongooseInstance: any;
+let mongooseConnection: Mongoose.Connection;
 
-    this.mongooseConnection = Mongoose.connection;
-    this.mongooseConnection.once('open', () => {
-      log('Connected to mongodb url:', DB_CONNECTION_STRING);
-    });
+const connect = () => {
+  if (mongooseInstance) return mongooseInstance;
 
-    this.mongooseInstance = Mongoose.connect(DB_CONNECTION_STRING);
-    return this.mongooseInstance;
-  }
+  mongooseConnection = Mongoose.connection;
+  mongooseConnection.once('open', () => {
+    log('Connected to mongodb url:', DB_CONNECTION_STRING);
+  });
 
-  constructor() {
-    DataAccess.connect();
-  }
-}
+  mongooseInstance = Mongoose.connect(DB_CONNECTION_STRING);
+  return mongooseInstance;
+};
 
-DataAccess.connect();
-export default DataAccess;
+export default connect();
+
+export {
+  mongooseInstance,
+  mongooseConnection
+};

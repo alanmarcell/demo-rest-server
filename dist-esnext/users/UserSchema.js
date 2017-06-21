@@ -1,6 +1,5 @@
-import DataAccess from '../core/DataAccess';
-const mongoose = DataAccess.mongooseInstance;
-const mongooseConnection = DataAccess.mongooseConnection;
+import { mongooseConnection, mongooseInstance } from '../core/DataAccess';
+const mongoose = mongooseInstance;
 class UserSchema {
     static get schema() {
         const schema = mongoose.Schema({
