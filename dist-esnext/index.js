@@ -1,53 +1,62 @@
 import dotenv from 'dotenv';
 dotenv.config();
+import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
-import GraphQlHttp from 'express-graphql';
-import * as fs from 'fs';
-import { graphql } from 'graphql';
-import { introspectionQuery } from 'graphql/utilities';
-import { MongoClient } from 'mongodb';
-import Schema from './core/schema';
-import MONGO_URL from './mongoDbUrl';
-import { UserApp } from 'ptz-user-app';
-import { UserRepository } from 'ptz-user-repository';
+import http from 'http';
+import morgan from 'morgan';
+// import path from 'path';
+import BaseRoutes from './config/routes/Routes';
 import logFile from 'ptz-log-file';
 const log = logFile({ dir: './logs' });
+const env = process.env.NODE_ENV || 'developement';
 const app = express();
-app.use(cors());
 log('starting server');
-const PORT = 3011;
-function getRunningUrl(path) {
-    return `http://localhost:${PORT}${path}`;
-}
-async function createGraphqlSchema(schema) {
-    const json = await graphql(schema, introspectionQuery);
-    const file = '/public/schema.json';
-    fs.writeFile(`.${file}`, JSON.stringify(json, null, 2), err => {
-        if (err)
-            throw err;
-        log('Json schema created!', getRunningUrl(file));
+const PORT = process.env.PORT || 3000;
+app.use(cors());
+// app.use('/app', express.static(path.resolve(__dirname, '../client/app')));
+// app.use('/libs', express.static(path.resolve(__dirname, '../client/libs')));
+// for system.js to work. Can be removed if bundling.
+// app.use(express.static(path.resolve(__dirname, '../client')));
+// app.use(express.static(path.resolve(__dirname, '../../node_modules')));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(morgan('dev'));
+app.use('/api', new BaseRoutes().routes);
+const renderIndex = (req, res) => {
+    res.json({
+        error: req.url,
+        message: '404'
     });
-    app.use('/public', express.static('public'));
+};
+app.get('/*', renderIndex);
+if (env === 'developement') {
+    app.use((error, req, res, next) => {
+        res.status(error.status || 500);
+        res.json({
+            error,
+            message: req
+        });
+        next(res);
+    });
 }
+app.use((req, res, next) => {
+    const error = new Error('Not Found' + req + res);
+    next(error);
+});
+app.use((error, res) => {
+    res.status(error.status || 500);
+    res.json({
+        error: {},
+        message: error.message
+    });
+});
 (async () => {
     try {
-        const db = await MongoClient.connect(MONGO_URL);
-        const userApp = new UserApp({
-            userRepository: new UserRepository(db),
-            log
-        });
-        await userApp.seed();
-        const schema = Schema(userApp, log);
-        const graphqlFolder = '/graphql';
-        app.use(graphqlFolder, GraphQlHttp({
-            schema,
-            graphiql: true
-        }));
-        await createGraphqlSchema(schema);
-        app.listen(PORT, () => {
-            const url = getRunningUrl(graphqlFolder);
-            log(`Running on ${url}`);
+        const server = await http.createServer(app);
+        app.listen(PORT, async () => {
+            await server.address();
+            console.log('This express server is listening on port:' + PORT);
         });
     }
     catch (e) {

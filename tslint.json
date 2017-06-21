@@ -3,8 +3,7 @@
     "rules": {
         "quotemark": [
             true,
-            "single",
-            "jsx-double"
+            "single"
         ],
         "member-access": false,
         "curly": false,
