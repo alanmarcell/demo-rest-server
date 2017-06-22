@@ -6,6 +6,7 @@ const router = express.Router();
 function getSeedRoutes() {
   console.log('seed route');
   router.get('/seed', SeedController.seedUsers);
+  router.post('/seedusers', SeedController.createUser);
 
   return router;
 }

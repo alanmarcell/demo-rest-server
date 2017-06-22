@@ -7,7 +7,7 @@ exports.getDb = exports.getUserApp = exports.createUser = undefined;
 
 var createUser = function () {
     var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(user) {
-        var db, userApp;
+        var db, userApp, authedUser, newUser, userArgs, createdPrd;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
@@ -19,26 +19,49 @@ var createUser = function () {
                     case 3:
                         db = _context2.sent;
                         userApp = getUserApp(db);
-                        _context2.next = 7;
-                        return userApp.saveUser(user);
 
-                    case 7:
-                        getRunningUrl(userApp);
-                        _context2.next = 13;
+                        (0, _index.log)('Repository user ', user);
+                        authedUser = {
+                            ip: '',
+                            dtCreated: new Date(),
+                            user: {
+                                displayName: 'CREATE TEST',
+                                id: 'ptz-user-app UserApp.seed()',
+                                email: '',
+                                userName: ''
+                            }
+                        };
+                        newUser = {
+                            userName: 'TESTE LALALA',
+                            email: 'teste@live.com',
+                            displayName: 'DYSPLAY LALALA'
+                        };
+                        userArgs = {
+                            userArgs: newUser,
+                            authedUser: authedUser
+                        };
+                        _context2.next = 11;
+                        return userApp.saveUser(userArgs);
+
+                    case 11:
+                        createdPrd = _context2.sent;
+
+                        (0, _index.log)('createdPrd', createdPrd);
+                        _context2.next = 18;
                         break;
 
-                    case 10:
-                        _context2.prev = 10;
+                    case 15:
+                        _context2.prev = 15;
                         _context2.t0 = _context2['catch'](0);
 
-                        console.log(_context2.t0);
+                        console.log('Seed REpository', _context2.t0);
 
-                    case 13:
+                    case 18:
                     case 'end':
                         return _context2.stop();
                 }
             }
-        }, _callee2, this, [[0, 10]]);
+        }, _callee2, this, [[0, 15]]);
     }));
 
     return function createUser(_x2) {
@@ -66,11 +89,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 _dotenv2.default.config();
 
-// log('Base REpository');
-var PORT = 3011;
-var getRunningUrl = function getRunningUrl(path) {
-    return 'http://localhost:' + PORT + path;
-};
 var getDb = function () {
     var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(dbConnectionString) {
         return regeneratorRuntime.wrap(function _callee$(_context) {

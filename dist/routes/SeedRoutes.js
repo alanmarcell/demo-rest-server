@@ -21,6 +21,7 @@ var router = _express2.default.Router();
 function getSeedRoutes() {
     console.log('seed route');
     router.get('/seed', SeedController.seedUsers);
+    router.post('/seedusers', SeedController.createUser);
     return router;
 }
 exports.getSeedRoutes = getSeedRoutes;
