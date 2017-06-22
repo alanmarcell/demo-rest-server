@@ -6,6 +6,7 @@ const router = express.Router();
 
 function getUserRoutes() {
 
+  console.log('user route');
   router.post('/users', UserController.createUser);
   router.use(verifyToken);
   router.get('/users', UserController.retrieveUsers);

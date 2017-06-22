@@ -18,6 +18,8 @@ var _ProductRoutes = require('../routes/ProductRoutes');
 
 var _ProductRoutes2 = _interopRequireDefault(_ProductRoutes);
 
+var _SeedRoutes = require('../routes/SeedRoutes');
+
 var _UserRoutes = require('../routes/UserRoutes');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -34,6 +36,7 @@ var Routes = function () {
     _createClass(Routes, [{
         key: 'routes',
         get: function get() {
+            app.use('/', (0, _SeedRoutes.getSeedRoutes)());
             app.use('/', new _AuthenticationRoutes2.default().routes);
             app.use('/', (0, _UserRoutes.getUserRoutes)());
             app.use('/', new _ProductRoutes2.default().routes);

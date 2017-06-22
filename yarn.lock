@@ -1890,6 +1890,10 @@ jws@^3.1.4:
     jwa "^1.1.4"
     safe-buffer "^5.0.1"
 
+jwt-simple@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/jwt-simple/-/jwt-simple-0.5.1.tgz#79ea01891b61de6b68e13e67c0b4b5bda937b294"
+
 kareem@1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/kareem/-/kareem-1.4.1.tgz#ed76200044fa041ef32b4da8261e2553f1173531"
@@ -2167,7 +2171,7 @@ mongodb@2.2.27:
     mongodb-core "2.1.11"
     readable-stream "2.2.7"
 
-mongodb@^2.2.25:
+mongodb@^2.2.24, mongodb@^2.2.25:
   version "2.2.29"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-2.2.29.tgz#36b244126f26766c5ebd6465b8ab5b542d6833c5"
   dependencies:
@@ -2545,7 +2549,14 @@ ptz-assert@^1.6.3:
     assert "^1.4.1"
     ptz-log "^1.0.0"
 
-ptz-core-domain@^1.1.4, ptz-core-domain@^1.3.3:
+ptz-core-app@^1.0.0:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/ptz-core-app/-/ptz-core-app-1.0.6.tgz#601fc4d20100aaaf36c98f1a810d318804dd44ad"
+  dependencies:
+    ptz-core-domain "^1.2.0"
+    ptz-log "^1.0.0"
+
+ptz-core-domain@^1.1.4, ptz-core-domain@^1.2.0, ptz-core-domain@^1.3.3:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/ptz-core-domain/-/ptz-core-domain-1.5.2.tgz#3bd7a4dbefb90cd31e93068c1931dd2dbb729988"
   dependencies:
@@ -2553,6 +2564,13 @@ ptz-core-domain@^1.1.4, ptz-core-domain@^1.3.3:
     ptz-log "^1.1.0"
     ptz-validations "^1.0.0"
     shortid "^2.2.6"
+
+ptz-core-repository@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ptz-core-repository/-/ptz-core-repository-1.0.1.tgz#388a8a225656b5d2e76dd7ec464447aa3077f04a"
+  dependencies:
+    mongodb "^2.2.25"
+    ptz-core-domain "^1.1.4"
 
 ptz-log-file@^1.0.0:
   version "1.0.5"
@@ -2569,12 +2587,32 @@ ptz-log@^1.0.0, ptz-log@^1.1.0:
   dependencies:
     moment "^2.18.1"
 
-ptz-user-domain@^1.8.4:
+ptz-user-app@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/ptz-user-app/-/ptz-user-app-1.5.3.tgz#7b91d65cfa1a5152dd6ca87abab8d68c48ef92a9"
+  dependencies:
+    bcryptjs "^2.4.3"
+    dotenv "^4.0.0"
+    jwt-simple "^0.5.1"
+    ptz-core-app "^1.0.0"
+    ptz-log "^1.0.0"
+    ptz-user-domain "^1.8.0"
+
+ptz-user-domain@^1.0.0, ptz-user-domain@^1.8.0, ptz-user-domain@^1.8.4:
   version "1.8.4"
   resolved "https://registry.yarnpkg.com/ptz-user-domain/-/ptz-user-domain-1.8.4.tgz#b91b51358c96aa88b6146629000da55ad5d0c95e"
   dependencies:
     ptz-core-domain "^1.1.4"
     ptz-log "^1.0.0"
+
+ptz-user-repository@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/ptz-user-repository/-/ptz-user-repository-1.1.3.tgz#bb84251cbf9a4dff850581118a70a9f72cd3cdf0"
+  dependencies:
+    mongodb "^2.2.24"
+    ptz-core-repository "^1.0.0"
+    ptz-log "^1.0.0"
+    ptz-user-domain "^1.0.0"
 
 ptz-validations@^1.0.0:
   version "1.2.2"

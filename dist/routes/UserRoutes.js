@@ -21,6 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = _express2.default.Router();
 function getUserRoutes() {
+    console.log('user route');
     router.post('/users', UserController.createUser);
     router.use(_AuthenticationController.verifyToken);
     router.get('/users', UserController.retrieveUsers);

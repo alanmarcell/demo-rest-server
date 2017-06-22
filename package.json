@@ -19,7 +19,7 @@
     "docs": "npm run docs:build && opn ./docs/index.html",
     "start": "npm-run-all --parallel gensalt server",
     "server": "npm run js && babel-node --presets es2015 dist/index.js",
-    "server:watch": "npm run js && nodemon dist/index.js --exec babel-node --presets es2015 dist/index.js",
+    "server:watch": "nodemon dist/index.js --exec babel-node --presets es2015 dist/index.js",
     "gensalt": "node gensalt.js"
   },
   "repository": {
