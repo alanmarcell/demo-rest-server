@@ -16,16 +16,16 @@ async function createUser(user) {
             ip: '',
             dtCreated: new Date(),
             user: {
-                displayName: 'CREATE TEST',
-                id: 'ptz-user-app UserApp.seed()',
-                email: '',
-                userName: ''
+                displayName: 'teste',
+                id: 'teste',
+                email: 'teste',
+                userName: 'teste'
             }
         };
         const newUser = {
-            userName: 'TESTE LALALA',
-            email: 'teste@live.com',
-            displayName: 'DYSPLAY LALALA'
+            userName: user.userName,
+            email: user.email,
+            displayName: user.displayName
         };
         const userArgs = {
             userArgs: newUser,
@@ -35,7 +35,7 @@ async function createUser(user) {
         log('createdPrd', createdPrd);
     }
     catch (e) {
-        console.log('Seed REpository', e);
+        console.log('Seed Repository', e);
     }
 }
 export { createUser, getUserApp, getDb };

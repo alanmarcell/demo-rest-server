@@ -65,22 +65,23 @@ var createUser = function () {
                         result = _context2.sent;
 
                         console.log(result);
-                        _context2.next = 13;
+                        res.send({ message: 'result' + result });
+                        _context2.next = 14;
                         break;
 
-                    case 9:
-                        _context2.prev = 9;
+                    case 10:
+                        _context2.prev = 10;
                         _context2.t0 = _context2['catch'](0);
 
                         (0, _index.log)(_context2.t0);
                         res.send({ message: '_|_' });
 
-                    case 13:
+                    case 14:
                     case 'end':
                         return _context2.stop();
                 }
             }
-        }, _callee2, this, [[0, 9]]);
+        }, _callee2, this, [[0, 10]]);
     }));
 
     return function createUser(_x3, _x4) {

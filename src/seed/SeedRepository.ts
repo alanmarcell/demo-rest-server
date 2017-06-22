@@ -11,30 +11,23 @@ const getDb = async (dbConnectionString: string) => await MongoClient.connect(DB
 
 const getUserApp = (db: Db) => new UserApp({ userRepository: new UserRepository(db), log });
 
-async function createUser(user) {
+async function createUser(user: IUserArgs) {
   try {
     const db = await getDb(DB_CONNECTION_STRING);
     const userApp = getUserApp(db);
-    log('Repository user ', user);
+
     const authedUser: ICreatedBy = {
       ip: '',
       dtCreated: new Date(),
       user: {
-        displayName: 'CREATE TEST',
-        id: 'ptz-user-app UserApp.seed()',
-        email: '',
-        userName: ''
+        displayName: 'teste',
+        id: 'teste',
+        email: 'teste',
+        userName: 'teste'
       }
     };
-
-    const newUser: IUserArgs = {
-      userName: 'TESTE LALALA',
-      email: 'teste@live.com',
-      displayName: 'DYSPLAY LALALA'
-    };
-
     const userArgs: ISaveUserArgs = {
-      userArgs: newUser,
+      userArgs: user,
       authedUser
     };
 

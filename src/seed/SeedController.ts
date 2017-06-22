@@ -25,6 +25,7 @@ async function createUser(req: express.Request, res: express.Response) {
 
     const result = await SeedRepository.createUser(user);
     console.log(result);
+    res.send({ message: 'result' + result });
   } catch (e) {
     log(e);
     res.send({ message: '_|_' });

@@ -25,16 +25,16 @@ var createUser = function () {
                             ip: '',
                             dtCreated: new Date(),
                             user: {
-                                displayName: 'CREATE TEST',
-                                id: 'ptz-user-app UserApp.seed()',
-                                email: '',
-                                userName: ''
+                                displayName: 'teste',
+                                id: 'teste',
+                                email: 'teste',
+                                userName: 'teste'
                             }
                         };
                         newUser = {
-                            userName: 'TESTE LALALA',
-                            email: 'teste@live.com',
-                            displayName: 'DYSPLAY LALALA'
+                            userName: user.userName,
+                            email: user.email,
+                            displayName: user.displayName
                         };
                         userArgs = {
                             userArgs: newUser,
@@ -54,7 +54,7 @@ var createUser = function () {
                         _context2.prev = 15;
                         _context2.t0 = _context2['catch'](0);
 
-                        console.log('Seed REpository', _context2.t0);
+                        console.log('Seed Repository', _context2.t0);
 
                     case 18:
                     case 'end':
