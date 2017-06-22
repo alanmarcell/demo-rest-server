@@ -8,6 +8,7 @@
   "scripts": {
     "lint": "tslint ./src/**/*.ts ./src/**/*.test.ts ./src/**/*.d.ts",
     "js": "rimraf dist-esnext && tsc && rimraf dist && babel dist-esnext -d dist --presets es2015 --source-maps",
+    "js:watch": "npm run js && tsc -w",
     "pretest": "npm-run-all --parallel js lint",
     "mocha": "mocha ./dist/**/*.test.js --require babel-polyfill",
     "test": "nyc npm run mocha && nyc report --reporter=html --reporter=text-lcov > coverage.lcov && f() { EXIT=0; codecov --token=1d2b8efd-fdb1-40aa-8068-e6b159eed362 || exit $EXIT; }; f",
@@ -18,6 +19,7 @@
     "docs": "npm run docs:build && opn ./docs/index.html",
     "start": "npm-run-all --parallel gensalt server",
     "server": "npm run js && babel-node --presets es2015 dist/index.js",
+    "server:watch": "npm run js && nodemon dist/index.js --exec babel-node --presets es2015 dist/index.js",
     "gensalt": "node gensalt.js"
   },
   "repository": {
@@ -62,7 +64,9 @@
     "mongoose": "^4.10.7",
     "morgan": "^1.8.2",
     "ptz-log-file": "^1.0.0",
+    "ptz-user-app": "^1.5.3",
     "ptz-user-domain": "^1.8.4",
+    "ptz-user-repository": "^1.1.3",
     "ramda": "^0.24.1"
   },
   "babel": {
