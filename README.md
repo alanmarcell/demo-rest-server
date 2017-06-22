@@ -1,5 +1,6 @@
 # Demo Server
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a61e906e0c0b487cbe4516b4f16ed259)](https://www.codacy.com/app/AlanMarcell/demo-server?utm_source=github.com&utm_medium=referral&utm_content=alanmarcell/demo-server&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/alanmarcell/demo-server.svg)](https://travis-ci.org/alanmarcell/demo-server)
 [![codecov.io](http://codecov.io/github/alanmarcell/demo-server/coverage.svg)](http://codecov.io/github/alanmarcell/demo-server)
 [![Dependency Status](https://gemnasium.com/alanmarcell/demo-server.svg)](https://gemnasium.com/alanmarcell/demo-server)
