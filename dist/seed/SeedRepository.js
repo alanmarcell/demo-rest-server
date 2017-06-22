@@ -3,10 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getDb = exports.getUserApp = exports.createConnection = undefined;
+exports.getDb = exports.getUserApp = exports.createUser = undefined;
 
-var createConnection = function () {
-    var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+var createUser = function () {
+    var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(user) {
         var db, userApp;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
@@ -20,7 +20,7 @@ var createConnection = function () {
                         db = _context2.sent;
                         userApp = getUserApp(db);
                         _context2.next = 7;
-                        return userApp.seed();
+                        return userApp.saveUser(user);
 
                     case 7:
                         getRunningUrl(userApp);
@@ -41,7 +41,7 @@ var createConnection = function () {
         }, _callee2, this, [[0, 10]]);
     }));
 
-    return function createConnection() {
+    return function createUser(_x2) {
         return _ref2.apply(this, arguments);
     };
 }();
@@ -98,8 +98,8 @@ var getDb = function () {
 var getUserApp = function getUserApp(db) {
     return new _ptzUserApp.UserApp({ userRepository: new _ptzUserRepository.UserRepository(db), log: _index.log });
 };
-exports.createConnection = createConnection;
+exports.createUser = createUser;
 exports.getUserApp = getUserApp;
 exports.getDb = getDb;
-//# sourceMappingURL=BaseRepositoryPtz.js.map
-//# sourceMappingURL=BaseRepositoryPtz.js.map
+//# sourceMappingURL=SeedRepository.js.map
+//# sourceMappingURL=SeedRepository.js.map

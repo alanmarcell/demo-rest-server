@@ -26,5 +26,4 @@ async function createConnection() {
   } catch (e) { console.log(e); }
 }
 
-createConnection();
 export { createConnection, getUserApp, getDb };
