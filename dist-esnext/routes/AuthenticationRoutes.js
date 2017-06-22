@@ -1,9 +1,9 @@
 import express from 'express';
-import { authenticateUser } from '../users/AuthenticationController';
+import { authenticateUserPtz } from '../users/AuthenticationControllerPtz';
 const router = express.Router();
 class AuthenticationRoutes {
     get routes() {
-        router.post('/authenticateUser', authenticateUser);
+        router.post('/authenticateUser', authenticateUserPtz);
         return router;
     }
 }

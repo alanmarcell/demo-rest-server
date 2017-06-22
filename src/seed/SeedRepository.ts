@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import { Db, MongoClient } from 'mongodb';
 import { UserApp } from 'ptz-user-app';
-import { ICreatedBy, ISaveUserArgs, IUserArgs } from 'ptz-user-domain';
+import { IAuthUserArgs, IAuthUserFormArgs, ICreatedBy, ISaveUserArgs, IUserArgs } from 'ptz-user-domain';
 import { UserRepository } from 'ptz-user-repository';
 import { DB_CONNECTION_STRING } from '../config/constants';
 import { log } from '../index';
@@ -32,8 +32,40 @@ async function createUser(user: IUserArgs) {
     };
 
     const createdPrd = await userApp.saveUser(userArgs);
-    log('createdPrd', createdPrd);
+    return createdPrd;
   } catch (e) { console.log('Seed Repository', e); }
 }
 
-export { createUser, getUserApp, getDb };
+async function authenticateUserPtz(user) {
+  try {
+    const db = await getDb(DB_CONNECTION_STRING);
+    const userApp = getUserApp(db);
+
+    const authedUser: ICreatedBy = {
+      ip: '',
+      dtCreated: new Date(),
+      user: {
+        displayName: 'teste',
+        id: 'teste',
+        email: 'teste',
+        userName: 'teste'
+      }
+    };
+
+    const form: IAuthUserFormArgs = {
+      userNameOrEmail: user.userNameOrEmail,
+      password: user.password.toString()
+    };
+
+    const userArgs: IAuthUserArgs = {
+      form,
+      authedUser
+    };
+
+    const createdPrd = await userApp.authUser(userArgs);
+
+    return createdPrd;
+  } catch (e) { console.log('authUser', e); }
+}
+
+export { createUser, getUserApp, getDb, authenticateUserPtz };

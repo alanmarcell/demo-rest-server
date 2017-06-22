@@ -10,7 +10,7 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
-var _AuthenticationController = require('../users/AuthenticationController');
+var _AuthenticationControllerPtz = require('../users/AuthenticationControllerPtz');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26,7 +26,7 @@ var AuthenticationRoutes = function () {
     _createClass(AuthenticationRoutes, [{
         key: 'routes',
         get: function get() {
-            router.post('/authenticateUser', _AuthenticationController.authenticateUser);
+            router.post('/authenticateUser', _AuthenticationControllerPtz.authenticateUserPtz);
             return router;
         }
     }]);

@@ -11,7 +11,6 @@ async function createUser(user) {
     try {
         const db = await getDb(DB_CONNECTION_STRING);
         const userApp = getUserApp(db);
-        log('Repository user ', user);
         const authedUser = {
             ip: '',
             dtCreated: new Date(),
@@ -22,21 +21,45 @@ async function createUser(user) {
                 userName: 'teste'
             }
         };
-        const newUser = {
-            userName: user.userName,
-            email: user.email,
-            displayName: user.displayName
-        };
         const userArgs = {
-            userArgs: newUser,
+            userArgs: user,
             authedUser
         };
         const createdPrd = await userApp.saveUser(userArgs);
-        log('createdPrd', createdPrd);
+        return createdPrd;
     }
     catch (e) {
         console.log('Seed Repository', e);
     }
 }
-export { createUser, getUserApp, getDb };
+async function authenticateUserPtz(user) {
+    try {
+        const db = await getDb(DB_CONNECTION_STRING);
+        const userApp = getUserApp(db);
+        const authedUser = {
+            ip: '',
+            dtCreated: new Date(),
+            user: {
+                displayName: 'teste',
+                id: 'teste',
+                email: 'teste',
+                userName: 'teste'
+            }
+        };
+        const form = {
+            userNameOrEmail: user.userNameOrEmail,
+            password: user.password.toString()
+        };
+        const userArgs = {
+            form,
+            authedUser
+        };
+        const createdPrd = await userApp.authUser(userArgs);
+        return createdPrd;
+    }
+    catch (e) {
+        console.log('authUser', e);
+    }
+}
+export { createUser, getUserApp, getDb, authenticateUserPtz };
 //# sourceMappingURL=SeedRepository.js.map
