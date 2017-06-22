@@ -1,11 +1,10 @@
-import express from 'express';
-import * as SeedController from '../seed/SeedController';
-const router = express.Router();
-function getSeedRoutes() {
-    console.log('seed route');
-    router.get('/seed', SeedController.seedUsers);
-    router.post('/seedusers', SeedController.createUser);
-    return router;
-}
-export { getSeedRoutes };
+// import express from 'express';
+// import * as SeedController from '../seed/SeedController';
+// const router = express.Router();
+// function getSeedRoutes() {
+//   router.get('/seed', SeedController.seedUsers);
+//   router.post('/seedusers', SeedController.createUser);
+//   return router;
+// }
+// export { getSeedRoutes };
 //# sourceMappingURL=SeedRoutes.js.map

@@ -1,9 +1,9 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
+import { createConnection } from '../core/BaseRepositoryPtz';
 import { log } from '../index';
-import * as SeedRepository from '../seed/SeedRepository';
+import * as SeedRepository from '../users/UserRepository';
 import { TOKEN_SECRET } from './../config/constants';
-import { findUser } from './../users/UserBusiness';
 const expiresIn = 1000; // seconds
 
 function verifyToken(req, res, next) {
@@ -27,7 +27,7 @@ function verifyToken(req, res, next) {
   }
 }
 
-async function authenticateUserPtz(req: express.Request, res: express.Response) {
+async function authenticateUser(req: express.Request, res: express.Response) {
   try {
     const user = req.body;
 
@@ -51,37 +51,32 @@ async function authenticateUserPtz(req: express.Request, res: express.Response) 
   }
 }
 
-function authenticateUser(req: express.Request, res: express.Response): void {
-
+async function seedUsers(req: express.Request, res: express.Response) {
   try {
-    const userName: string = req.body.name;
-    findUser(userName, (error, user) => {
-      if (error) return res.send({ error: 'error' });
-
-      if (!user) return res.json({ success: false, message: 'Authentication failed. User not found.' });
-
-      if (user.password !== req.body.password)
-        return res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-
-      const token = jwt.sign(user, TOKEN_SECRET, {
-        expiresIn // expires in 60 seconds
-      });
-
-      res.json({
-        success: true,
-        message: 'Enjoy your token!',
-        token,
-        expiresIn
-      });
-    });
+    const result = await createConnection();
+    res.send({ message: 'Sedado' });
   } catch (e) {
     log(e);
     res.send({ error: 'error in your request' });
   }
 }
 
+async function createUser(req: express.Request, res: express.Response) {
+  try {
+    const user = req.body;
+
+    const result = await SeedRepository.createUser(user);
+
+    res.send({ message: result });
+  } catch (e) {
+    log(e);
+    res.send({ message: e });
+  }
+}
+
 export {
+  seedUsers,
+  createUser,
   authenticateUser,
-  authenticateUserPtz,
   verifyToken
 };

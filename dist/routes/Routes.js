@@ -10,15 +10,9 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
-var _AuthenticationRoutes = require('../routes/AuthenticationRoutes');
-
-var _AuthenticationRoutes2 = _interopRequireDefault(_AuthenticationRoutes);
-
 var _ProductRoutes = require('../routes/ProductRoutes');
 
 var _ProductRoutes2 = _interopRequireDefault(_ProductRoutes);
-
-var _SeedRoutes = require('../routes/SeedRoutes');
 
 var _UserRoutes = require('../routes/UserRoutes');
 
@@ -36,10 +30,8 @@ var Routes = function () {
     _createClass(Routes, [{
         key: 'routes',
         get: function get() {
-            app.use('/', (0, _SeedRoutes.getSeedRoutes)());
-            app.use('/', new _AuthenticationRoutes2.default().routes);
-            app.use('/', (0, _UserRoutes.getUserRoutes)());
             app.use('/', new _ProductRoutes2.default().routes);
+            app.use('/', (0, _UserRoutes.getUserRoutes)());
             return app;
         }
     }]);
