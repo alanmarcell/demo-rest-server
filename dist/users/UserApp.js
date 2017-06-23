@@ -3,183 +3,170 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.verifyToken = exports.authenticateUserPtz = exports.createUser = exports.seedUsers = undefined;
+exports.authenticateUserPtz = exports.getDb = exports.getUserApp = exports.createUser = undefined;
 
-var authenticateUserPtz = function () {
-    var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(req, res) {
-        var user, authUser, token;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-                switch (_context.prev = _context.next) {
-                    case 0:
-                        _context.prev = 0;
-                        user = req.body;
-                        _context.next = 4;
-                        return SeedRepository.authenticateUserPtz(user);
-
-                    case 4:
-                        authUser = _context.sent;
-
-                        if (authUser) {
-                            _context.next = 7;
-                            break;
-                        }
-
-                        return _context.abrupt('return', res.json({ success: false, message: 'Authentication failed. User not found.' }));
-
-                    case 7:
-                        token = _jsonwebtoken2.default.sign(user, _constants.TOKEN_SECRET, {
-                            expiresIn: expiresIn // expires in 60 seconds
-                        });
-
-                        res.json({
-                            success: true,
-                            message: 'Enjoy your token!',
-                            token: token,
-                            expiresIn: expiresIn
-                        });
-                        _context.next = 15;
-                        break;
-
-                    case 11:
-                        _context.prev = 11;
-                        _context.t0 = _context['catch'](0);
-
-                        (0, _index.log)(_context.t0);
-                        res.send({ message: 'AUTH_CONTROLLER _|_' });
-
-                    case 15:
-                    case 'end':
-                        return _context.stop();
-                }
-            }
-        }, _callee, this, [[0, 11]]);
-    }));
-
-    return function authenticateUserPtz(_x, _x2) {
-        return _ref.apply(this, arguments);
-    };
-}();
-
-var seedUsers = function () {
-    var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(req, res) {
-        var result;
+var createUser = function () {
+    var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(user) {
+        var db, userApp, authedUser, userArgs, createdPrd;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
                         _context2.prev = 0;
                         _context2.next = 3;
-                        return (0, _BaseRepositoryPtz.createConnection)();
+                        return getDb(_constants.DB_CONNECTION_STRING);
 
                     case 3:
-                        result = _context2.sent;
+                        db = _context2.sent;
+                        userApp = getUserApp(db);
+                        authedUser = {
+                            ip: '',
+                            dtCreated: new Date(),
+                            user: {
+                                displayName: 'teste',
+                                id: 'teste',
+                                email: 'teste',
+                                userName: 'teste'
+                            }
+                        };
+                        userArgs = {
+                            userArgs: user,
+                            authedUser: authedUser
+                        };
+                        _context2.next = 9;
+                        return userApp.saveUser(userArgs);
 
-                        res.send({ message: 'Sedado' });
-                        _context2.next = 11;
-                        break;
+                    case 9:
+                        createdPrd = _context2.sent;
+                        return _context2.abrupt('return', createdPrd);
 
-                    case 7:
-                        _context2.prev = 7;
+                    case 13:
+                        _context2.prev = 13;
                         _context2.t0 = _context2['catch'](0);
 
-                        (0, _index.log)(_context2.t0);
-                        res.send({ error: 'error in your request' });
+                        console.log('Seed Repository', _context2.t0);
 
-                    case 11:
+                    case 16:
                     case 'end':
                         return _context2.stop();
                 }
             }
-        }, _callee2, this, [[0, 7]]);
+        }, _callee2, this, [[0, 13]]);
     }));
 
-    return function seedUsers(_x3, _x4) {
+    return function createUser(_x2) {
         return _ref2.apply(this, arguments);
     };
 }();
 
-var createUser = function () {
-    var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(req, res) {
-        var user, result;
+var authenticateUserPtz = function () {
+    var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(user) {
+        var db, userApp, authedUser, form, userArgs, createdPrd;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
                     case 0:
                         _context3.prev = 0;
-                        user = req.body;
-                        _context3.next = 4;
-                        return SeedRepository.createUser(user);
+                        _context3.next = 3;
+                        return getDb(_constants.DB_CONNECTION_STRING);
 
-                    case 4:
-                        result = _context3.sent;
+                    case 3:
+                        db = _context3.sent;
+                        userApp = getUserApp(db);
+                        authedUser = {
+                            ip: '',
+                            dtCreated: new Date(),
+                            user: {
+                                displayName: 'teste',
+                                id: 'teste',
+                                email: 'teste',
+                                userName: 'teste'
+                            }
+                        };
+                        form = {
+                            userNameOrEmail: user.userNameOrEmail,
+                            password: user.password.toString()
+                        };
+                        userArgs = {
+                            form: form,
+                            authedUser: authedUser
+                        };
+                        _context3.next = 10;
+                        return userApp.authUser(userArgs);
 
-                        res.send({ message: result });
-                        _context3.next = 12;
-                        break;
+                    case 10:
+                        createdPrd = _context3.sent;
+                        return _context3.abrupt('return', createdPrd);
 
-                    case 8:
-                        _context3.prev = 8;
+                    case 14:
+                        _context3.prev = 14;
                         _context3.t0 = _context3['catch'](0);
 
-                        (0, _index.log)(_context3.t0);
-                        res.send({ message: _context3.t0 });
+                        console.log('authUser', _context3.t0);
 
-                    case 12:
+                    case 17:
                     case 'end':
                         return _context3.stop();
                 }
             }
-        }, _callee3, this, [[0, 8]]);
+        }, _callee3, this, [[0, 14]]);
     }));
 
-    return function createUser(_x5, _x6) {
+    return function authenticateUserPtz(_x3) {
         return _ref3.apply(this, arguments);
     };
 }();
 
-var _jsonwebtoken = require('jsonwebtoken');
+var _dotenv = require('dotenv');
 
-var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
+var _dotenv2 = _interopRequireDefault(_dotenv);
 
-var _BaseRepositoryPtz = require('../core/BaseRepositoryPtz');
+var _mongodb = require('mongodb');
+
+var _ptzUserApp = require('ptz-user-app');
+
+var _ptzUserRepository = require('ptz-user-repository');
+
+var _constants = require('../config/constants');
 
 var _index = require('../index');
-
-var _UserRepository = require('../users/UserRepository');
-
-var SeedRepository = _interopRequireWildcard(_UserRepository);
-
-var _constants = require('./../config/constants');
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-var expiresIn = 1000; // seconds
-function verifyToken(req, res, next) {
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    if (token) {
-        _jsonwebtoken2.default.verify(token, _constants.TOKEN_SECRET, function (err, decoded) {
-            if (err) {
-                res.json({ success: false, message: 'Failed to authenticate token.' });
-            } else {
-                req.decoded = decoded;
-                next();
+_dotenv2.default.config();
+
+var getDb = function () {
+    var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(dbConnectionString) {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        _context.next = 2;
+                        return _mongodb.MongoClient.connect(_constants.DB_CONNECTION_STRING);
+
+                    case 2:
+                        return _context.abrupt('return', _context.sent);
+
+                    case 3:
+                    case 'end':
+                        return _context.stop();
+                }
             }
-        });
-    } else {
-        res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
-    }
-}
-exports.seedUsers = seedUsers;
+        }, _callee, undefined);
+    }));
+
+    return function getDb(_x) {
+        return _ref.apply(this, arguments);
+    };
+}();
+var getUserApp = function getUserApp(db) {
+    return new _ptzUserApp.UserApp({ userRepository: new _ptzUserRepository.UserRepository(db), log: _index.log });
+};
 exports.createUser = createUser;
+exports.getUserApp = getUserApp;
+exports.getDb = getDb;
 exports.authenticateUserPtz = authenticateUserPtz;
-exports.verifyToken = verifyToken;
 //# sourceMappingURL=UserApp.js.map
 //# sourceMappingURL=UserApp.js.map

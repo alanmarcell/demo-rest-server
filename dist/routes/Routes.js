@@ -30,8 +30,8 @@ var Routes = function () {
     _createClass(Routes, [{
         key: 'routes',
         get: function get() {
-            app.use('/', new _ProductRoutes2.default().routes);
             app.use('/', (0, _UserRoutes.getUserRoutes)());
+            app.use('/', new _ProductRoutes2.default().routes);
             return app;
         }
     }]);

@@ -9,7 +9,7 @@ import logFile from 'ptz-log-file';
 export const log = logFile({ dir: './logs' });
 const env = process.env.NODE_ENV || 'developement';
 const app = express();
-log('Starting New server...', new Date());
+log('Starting New server...');
 const PORT = process.env.PORT || 3010;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));

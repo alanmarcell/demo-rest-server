@@ -4,8 +4,8 @@ import { getUserRoutes } from '../routes/UserRoutes';
 const app = express();
 class Routes {
     get routes() {
-        app.use('/', new ProductRoutes().routes);
         app.use('/', getUserRoutes());
+        app.use('/', new ProductRoutes().routes);
         return app;
     }
 }

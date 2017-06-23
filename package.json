@@ -7,7 +7,7 @@
   "typings": "src/index.ts",
   "scripts": {
     "lint": "tslint ./src/**/*.ts ./src/**/*.test.ts ./src/**/*.d.ts",
-    "js": "rimraf dist-esnext && tsc && rimraf dist && babel dist-esnext -d dist --presets es2015 --source-maps",
+    "js": "rimraf dist-esnext; tsc; rimraf dis; babel dist-esnext -d dist --presets es2015 --source-maps",
     "js:watch": "npm run js && tsc -w",
     "pretest": "npm-run-all --parallel js lint",
     "mocha": "mocha ./dist/**/*.test.js --require babel-polyfill",
@@ -19,6 +19,7 @@
     "docs:build": "typedoc --out ./docs ./ --includeDeclarations --excludeExternals --exclude '**/*.test.ts' 'node_modules'",
     "docs": "npm run docs:build && opn ./docs/index.html",
     "start": "npm-run-all --parallel gensalt server",
+    "serve": "tsc; babel dist-esnext -d dist --presets es2015 --source-maps; babel-node --presets es2015 dist/index.js",
     "server": "npm run js && babel-node --presets es2015 dist/index.js",
     "server:watch": "nodemon dist/index.js --exec babel-node --presets es2015 dist/index.js",
     "gensalt": "node gensalt.js"

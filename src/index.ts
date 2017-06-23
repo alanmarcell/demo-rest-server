@@ -12,7 +12,7 @@ const env: string = process.env.NODE_ENV || 'developement';
 
 const app = express();
 
-log('Starting New server...', new Date());
+log('Starting New server...');
 
 const PORT = process.env.PORT || 3010;
 

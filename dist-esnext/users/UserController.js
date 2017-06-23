@@ -1,94 +1,70 @@
+import jwt from 'jsonwebtoken';
+import { createConnection } from '../core/BaseRepositoryPtz';
 import { log } from '../index';
-import * as UserBusiness from './UserBusiness';
-function createUser(req, res) {
+import * as UserApp from '../users/UserApp';
+import { TOKEN_SECRET } from './../config/constants';
+const expiresIn = 1000; // seconds
+function verifyToken(req, res, next) {
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token) {
+        jwt.verify(token, TOKEN_SECRET, (err, decoded) => {
+            if (err) {
+                res.json({ success: false, message: 'Failed to authenticate token.' });
+            }
+            else {
+                req.decoded = decoded;
+                next();
+            }
+        });
+    }
+    else {
+        res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
+    }
+}
+async function authenticateUser(req, res) {
     try {
         const user = req.body;
-        UserBusiness.createUser(user, (error) => {
-            if (error)
-                res.send({ error: 'error' });
-            else
-                res.send({ success: 'success' });
+        const authUser = await UserApp.authenticateUserPtz(user);
+        if (!authUser)
+            return res.json({ success: false, message: 'Authentication failed. User not found.' });
+        const token = jwt.sign(user, TOKEN_SECRET, {
+            expiresIn // expires in 60 seconds
         });
+        res.json({
+            success: true,
+            message: 'Enjoy your token!',
+            token,
+            expiresIn
+        });
+    }
+    catch (e) {
+        log(e);
+        res.send({ message: 'AUTH_CONTROLLER _|_' });
+    }
+}
+async function seedUsers(req, res) {
+    try {
+        const result = await createConnection();
+        res.send({ message: 'Sedado' });
     }
     catch (e) {
         log(e);
         res.send({ error: 'error in your request' });
     }
 }
-function updateUser(req, res) {
+async function createUser(req, res) {
     try {
         const user = req.body;
-        const id = req.params._id;
-        UserBusiness.updateUser(id, user, (error) => {
-            if (error)
-                res.send({ error: 'error' });
-            else
-                res.send({ success: 'success' });
-        });
+        const result = await UserApp.createUser(user);
+        res.send({ message: result });
     }
     catch (e) {
         log(e);
-        res.send({ error: 'error in your request' });
+        res.send({ message: e });
     }
 }
-function deleteUser(req, res) {
-    try {
-        const id = req.params._id;
-        UserBusiness.deleteUser(id, (error) => {
-            if (error)
-                res.send({ error: 'error' });
-            else
-                res.send({ success: 'success' });
-        });
-    }
-    catch (e) {
-        log(e);
-        res.send({ error: 'error in your request' });
-    }
-}
-function retrieveUsers(req, res) {
-    try {
-        UserBusiness.retrieveUsers((error, result) => {
-            if (error)
-                res.send({ error: 'error' + req });
-            else
-                res.send(result);
-        });
-    }
-    catch (e) {
-        log(e);
-        res.send({ error: 'error in your request' });
-    }
-}
-function findUserById(req, res) {
-    try {
-        const id = req.params._id;
-        UserBusiness.findUserById(id, (error, result) => {
-            if (error)
-                res.send({ error: 'error' });
-            else
-                res.send(result);
-        });
-    }
-    catch (e) {
-        log(e);
-        res.send({ error: 'error in your request' });
-    }
-}
-function findUser(req, res) {
-    try {
-        const param = req.params.param;
-        UserBusiness.findUser(param, (error, result) => {
-            if (error)
-                res.send({ error });
-            else
-                res.send(result);
-        });
-    }
-    catch (e) {
-        log(e);
-        res.send({ error: 'error in your request' });
-    }
-}
-export { createUser, findUser, deleteUser, updateUser, retrieveUsers, findUserById };
+export { seedUsers, createUser, authenticateUser, verifyToken };
 //# sourceMappingURL=UserController.js.map

@@ -9,9 +9,9 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
-var _UserApp = require('../users/UserApp');
+var _UserController = require('../users/UserController');
 
-var UserController = _interopRequireWildcard(_UserApp);
+var UserController = _interopRequireWildcard(_UserController);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -19,13 +19,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = _express2.default.Router();
 function getUserRoutes() {
-    router.post('/authenticateUser', UserController.authenticateUserPtz);
-    router.use(UserController.verifyToken);
     router.post('/users', UserController.createUser);
-    // router.get('/users', UserController.retrieveUsers);
-    // router.put('/users/:_id', UserController.updateUser);
-    // router.get('/users/:param', UserController.findUser);
-    // router.delete('/users/:_id', UserController.deleteUser);
+    router.post('/authenticateUser', UserController.authenticateUser);
+    router.use(UserController.verifyToken);
     return router;
 }
 exports.getUserRoutes = getUserRoutes;
