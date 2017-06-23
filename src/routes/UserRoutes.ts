@@ -1,18 +1,13 @@
 import express from 'express';
-import * as UserApp from '../users/UserApp';
+import * as UserController from '../users/UserController';
 
 const router = express.Router();
 
 function getUserRoutes() {
 
-  router.post('/authenticateUser', UserApp.authenticateUser);
-  router.use(UserApp.verifyToken);
-  router.post('/users', UserApp.createUser);
-
-  // router.get('/users', UserApp.retrieveUsers);
-  // router.put('/users/:_id', UserApp.updateUser);
-  // router.get('/users/:param', UserApp.findUser);
-  // router.delete('/users/:_id', UserApp.deleteUser);
+  router.post('/users', UserController.createUser);
+  router.post('/authenticateUser', UserController.authenticateUser);
+  router.use(UserController.verifyToken);
 
   return router;
 }
