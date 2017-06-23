@@ -26,6 +26,9 @@ Demo Server was made with Polutz
     node run seed.js 
 ```
 
+### Pre-start
+Make sure mongodb is running on port 27017
+
 ### Start
 ```
     npm start
