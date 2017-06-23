@@ -14,8 +14,6 @@ demo-server é um doi feito com Polutz.
 
 ## Como usar
 
-## Contribuir com o projeto
-
 ### NPM Global packages
 ```
     npm install -g ts-node babel-cli
@@ -24,9 +22,10 @@ demo-server é um doi feito com Polutz.
 ### Instalação
 ```
     npm install   
+    node run seed.js 
 ```
 
-### Teste
+### Start
 ```
-    npm test
+    npm start
 ```
