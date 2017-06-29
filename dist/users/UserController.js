@@ -63,35 +63,24 @@ var authenticateUser = function () {
 
 var seedUsers = function () {
     var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(req, res) {
-        var result;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
-                        _context2.prev = 0;
-                        _context2.next = 3;
-                        return (0, _BaseRepositoryPtz.createConnection)();
+                        try {
+                            // const result = await createConnection();
+                            res.send({ message: 'Sedado' });
+                        } catch (e) {
+                            (0, _index.log)(e);
+                            res.send({ error: 'error in your request' });
+                        }
 
-                    case 3:
-                        result = _context2.sent;
-
-                        res.send({ message: 'Sedado' });
-                        _context2.next = 11;
-                        break;
-
-                    case 7:
-                        _context2.prev = 7;
-                        _context2.t0 = _context2['catch'](0);
-
-                        (0, _index.log)(_context2.t0);
-                        res.send({ error: 'error in your request' });
-
-                    case 11:
+                    case 1:
                     case 'end':
                         return _context2.stop();
                 }
             }
-        }, _callee2, this, [[0, 7]]);
+        }, _callee2, this);
     }));
 
     return function seedUsers(_x3, _x4) {
@@ -142,8 +131,6 @@ var _jsonwebtoken = require('jsonwebtoken');
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
-var _BaseRepositoryPtz = require('../core/BaseRepositoryPtz');
-
 var _index = require('../index');
 
 var _UserApp = require('../users/UserApp');
@@ -157,6 +144,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+// import { createConnection } from '../core/BaseRepositoryPtz';
+
 
 var expiresIn = 1000; // seconds
 function verifyToken(req, res, next) {

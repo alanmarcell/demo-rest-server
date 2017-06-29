@@ -1,20 +1,23 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import { Db, MongoClient } from 'mongodb';
-import { UserApp } from 'ptz-user-app';
-import { IAuthUserArgs, IAuthUserFormArgs, ICreatedBy, ISaveUserArgs, IUserArgs } from 'ptz-user-domain';
-import { UserRepository } from 'ptz-user-repository';
+import { createApp } from '@alanmarcell/ptz-user-app';
+import {
+  IAuthUserArgs, IAuthUserFormArgs, ICreatedBy, ISaveUserArgs,
+  IUserArgs, IUserRepository
+} from '@alanmarcell/ptz-user-domain';
+import { createUserRepository } from '@alanmarcell/ptz-user-repository';
 import { DB_CONNECTION_STRING } from '../config/constants';
 import { log } from '../index';
 
-const getDb = async (dbConnectionString: string) => await MongoClient.connect(DB_CONNECTION_STRING);
+// const getDb = async (dbConnectionString: string) => await MongoClient.connect(DB_CONNECTION_STRING);
 
-const getUserApp = (db: Db) => new UserApp({ userRepository: new UserRepository(db), log });
-
+// const getUserApp = (db: Db) => new UserApp({ userRepository: new UserRepository(db), log });
 async function createUser(user: IUserArgs) {
+  const userRepository: IUserRepository = await createUserRepository(DB_CONNECTION_STRING, 'users');
+  const userApp = createApp({ userRepository, log });
   try {
-    const db = await getDb(DB_CONNECTION_STRING);
-    const userApp = getUserApp(db);
+    // const db = await getDb(DB_CONNECTION_STRING);
+    // const userApp = getUserApp(db);
 
     const authedUser: ICreatedBy = {
       ip: '',
@@ -38,8 +41,9 @@ async function createUser(user: IUserArgs) {
 
 async function authenticateUserPtz(user) {
   try {
-    const db = await getDb(DB_CONNECTION_STRING);
-    const userApp = getUserApp(db);
+
+    const userRepository = await createUserRepository(DB_CONNECTION_STRING, 'users');
+    const userApp = createApp({ userRepository });
 
     const authedUser: ICreatedBy = {
       ip: '',
@@ -68,4 +72,4 @@ async function authenticateUserPtz(user) {
   } catch (e) { console.log('authUser', e); }
 }
 
-export { createUser, getUserApp, getDb, authenticateUserPtz };
+export { createUser, authenticateUserPtz };

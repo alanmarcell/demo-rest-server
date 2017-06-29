@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { createConnection } from '../core/BaseRepositoryPtz';
+// import { createConnection } from '../core/BaseRepositoryPtz';
 import { log } from '../index';
 import * as UserApp from '../users/UserApp';
 import { TOKEN_SECRET } from './../config/constants';
@@ -47,7 +47,7 @@ async function authenticateUser(req, res) {
 }
 async function seedUsers(req, res) {
     try {
-        const result = await createConnection();
+        // const result = await createConnection();
         res.send({ message: 'Sedado' });
     }
     catch (e) {

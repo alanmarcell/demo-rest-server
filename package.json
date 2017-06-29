@@ -57,6 +57,9 @@
     "typescript": "^2.2.2"
   },
   "dependencies": {
+    "@alanmarcell/ptz-user-app": "^0.0.0",
+    "@alanmarcell/ptz-user-domain": "^0.0.4",
+    "@alanmarcell/ptz-user-repository": "^0.0.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
     "chai": "^4.0.2",
@@ -68,9 +71,6 @@
     "mongoose": "^4.10.7",
     "morgan": "^1.8.2",
     "ptz-log-file": "^1.0.0",
-    "ptz-user-app": "^1.5.3",
-    "ptz-user-domain": "^1.8.4",
-    "ptz-user-repository": "^1.1.3",
     "ramda": "^0.24.1"
   },
   "babel": {
