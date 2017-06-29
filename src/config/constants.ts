@@ -8,9 +8,9 @@ export const {
   PASSWORD_SALT,
 } = process.env;
 
-export const DB_CONNECTION_STRING: string = process.env.NODE_ENV === 'production'
+export const DB_CONNECTION_STRING: string =  process.env.NODE_ENV === 'production'
   ? process.env.PROD_URL
-  : process.env.DEV_URL;
+  : 'mongodb://localhost:27017/demo-server';
 
 export const TOKEN_SECRET: string = PASSWORD_SALT;
 

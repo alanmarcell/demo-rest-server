@@ -19,7 +19,7 @@ var DEV_URL = _process$env.DEV_URL,
 exports.DEV_URL = DEV_URL;
 exports.PROD_URL = PROD_URL;
 exports.PASSWORD_SALT = PASSWORD_SALT;
-var DB_CONNECTION_STRING = exports.DB_CONNECTION_STRING = process.env.NODE_ENV === 'production' ? process.env.PROD_URL : process.env.DEV_URL;
+var DB_CONNECTION_STRING = exports.DB_CONNECTION_STRING = process.env.NODE_ENV === 'production' ? process.env.PROD_URL : 'mongodb://localhost:27017/demo-server';
 var TOKEN_SECRET = exports.TOKEN_SECRET = PASSWORD_SALT;
 var tokenTimeout = exports.tokenTimeout = 10;
 //# sourceMappingURL=constants.js.map
