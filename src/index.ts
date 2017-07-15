@@ -3,7 +3,6 @@ import cors from 'cors';
 import express from 'express';
 import http from 'http';
 import morgan from 'morgan';
-// import path from 'path';
 import BaseRoutes from './routes/Routes';
 
 import logFile from 'ptz-log-file';

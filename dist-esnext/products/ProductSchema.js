@@ -1,9 +1,8 @@
 import { mongooseConnection, mongooseInstance } from '../core/DataAccess';
 const mongoose = mongooseInstance;
-// const mongooseConnection = mongooseConnection;
 class ProductSchema {
     static get schema() {
-        const schema = mongoose.Schema({
+        return mongoose.Schema({
             name: {
                 type: String,
                 required: true
@@ -17,7 +16,6 @@ class ProductSchema {
                 required: true
             }
         });
-        return schema;
     }
 }
 const schema = mongooseConnection.model('Products', ProductSchema.schema);

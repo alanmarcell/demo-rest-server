@@ -1,70 +1,80 @@
-import jwt from 'jsonwebtoken';
-// import { createConnection } from '../core/BaseRepositoryPtz';
+import { createApp } from '@alanmarcell/ptz-user-app';
+import { createUserRepository } from '@alanmarcell/ptz-user-repository';
+import { DB_CONNECTION_STRING } from '../config/constants';
 import { log } from '../index';
-import * as UserApp from '../users/UserApp';
-import { TOKEN_SECRET } from './../config/constants';
 const expiresIn = 1000; // seconds
-function verifyToken(req, res, next) {
+const getAuthedBy = () => {
+    return {
+        ip: '',
+        dtCreated: new Date(),
+        user: {
+            displayName: 'teste',
+            id: 'teste',
+            email: 'teste',
+            userName: 'teste'
+        }
+    };
+};
+const getUserApp = async () => {
+    const userRepository = await createUserRepository(DB_CONNECTION_STRING, 'users');
+    return createApp({ userRepository, log });
+};
+// tslint:disable-next-line:max-line-length
+async function verifyToken(req, res, next) {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
-    if (token) {
-        jwt.verify(token, TOKEN_SECRET, (err, decoded) => {
-            if (err) {
-                res.json({ success: false, message: 'Failed to authenticate token.' });
-            }
-            else {
-                req.decoded = decoded;
-                next();
-            }
-        });
-    }
-    else {
-        res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
-    }
+    if (!token)
+        return res.status(403).send({ success: false, message: 'No token provided.' });
+    const authedUser = getAuthedBy();
+    const userApp = await getUserApp();
+    const verifyArgs = { token, authedUser };
+    const toAuth = await userApp.verifyAuthToken(verifyArgs);
+    if (!toAuth)
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
+    req.decoded = toAuth;
+    next();
 }
 async function authenticateUser(req, res) {
     try {
         const user = req.body;
-        const authUser = await UserApp.authenticateUserPtz(user);
-        if (!authUser)
+        const userApp = await getUserApp();
+        const authedUser = getAuthedBy();
+        const form = {
+            userNameOrEmail: user.userNameOrEmail,
+            password: user.password.toString()
+        };
+        const userArgs = {
+            form,
+            authedUser
+        };
+        const token = await userApp.getAuthToken(userArgs);
+        if (!token.user)
             return res.json({ success: false, message: 'Authentication failed. User not found.' });
-        const token = jwt.sign(user, TOKEN_SECRET, {
-            expiresIn // expires in 60 seconds
-        });
         res.json({
             success: true,
             message: 'Enjoy your token!',
-            token,
+            token: token.authToken,
             expiresIn
         });
     }
     catch (e) {
-        log(e);
-        res.send({ message: 'AUTH_CONTROLLER _|_' });
-    }
-}
-async function seedUsers(req, res) {
-    try {
-        // const result = await createConnection();
-        res.send({ message: 'Sedado' });
-    }
-    catch (e) {
-        log(e);
-        res.send({ error: 'error in your request' });
+        res.send({ message: e });
     }
 }
 async function createUser(req, res) {
     try {
         const user = req.body;
-        const result = await UserApp.createUser(user);
+        const userApp = await getUserApp();
+        const authedUser = getAuthedBy();
+        const userArgs = {
+            userArgs: user,
+            authedUser
+        };
+        const result = await userApp.saveUser(userArgs);
         res.send({ message: result });
     }
     catch (e) {
-        log(e);
         res.send({ message: e });
     }
 }
-export { seedUsers, createUser, authenticateUser, verifyToken };
+export { createUser, authenticateUser, verifyToken };
 //# sourceMappingURL=UserController.js.map

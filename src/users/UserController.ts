@@ -1,82 +1,98 @@
+import { createApp } from '@alanmarcell/ptz-user-app';
+import {
+  IAuthUserArgs, IAuthUserFormArgs, ICreatedBy, ISaveUserArgs,
+  IUser,
+  IVerifyAuthTokenArgs
+} from '@alanmarcell/ptz-user-domain';
+import { createUserRepository } from '@alanmarcell/ptz-user-repository';
 import express from 'express';
-import jwt from 'jsonwebtoken';
-// import { createConnection } from '../core/BaseRepositoryPtz';
+import { DB_CONNECTION_STRING } from '../config/constants';
 import { log } from '../index';
-import * as UserApp from '../users/UserApp';
-import { TOKEN_SECRET } from './../config/constants';
+
 const expiresIn = 1000; // seconds
 
-function verifyToken(req, res, next) {
+const getAuthedBy = (): ICreatedBy => {
+  return {
+    ip: '',
+    dtCreated: new Date(),
+    user: {
+      displayName: 'teste',
+      id: 'teste',
+      email: 'teste',
+      userName: 'teste'
+    }
+  };
+};
+
+const getUserApp = async () => {
+  const userRepository = await createUserRepository(DB_CONNECTION_STRING, 'users');
+  return createApp({ userRepository, log });
+};
+
+// tslint:disable-next-line:max-line-length
+async function verifyToken(req: express.Request & { decoded: IUser }, res: express.Response, next: express.NextFunction) {
   const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
-  if (token) {
-    jwt.verify(token, TOKEN_SECRET, (err, decoded) => {
-      if (err) {
-        res.json({ success: false, message: 'Failed to authenticate token.' });
-      } else {
-        req.decoded = decoded;
-        next();
-      }
-    });
-  } else {
-    res.status(403).send({
-      success: false,
-      message: 'No token provided.'
-    });
+  if (!token)
+    return res.status(403).send({ success: false, message: 'No token provided.' });
 
-  }
+  const authedUser = getAuthedBy();
+  const userApp = await getUserApp();
+
+  const verifyArgs: IVerifyAuthTokenArgs = { token, authedUser };
+
+  const toAuth = await userApp.verifyAuthToken(verifyArgs);
+
+  if (!toAuth) return res.json({ success: false, message: 'Failed to authenticate token.' });
+
+  req.decoded = toAuth;
+  next();
 }
 
 async function authenticateUser(req: express.Request, res: express.Response) {
   try {
     const user = req.body;
 
-    const authUser = await UserApp.authenticateUserPtz(user);
+    const userApp = await getUserApp();
+    const authedUser = getAuthedBy();
 
-    if (!authUser) return res.json({ success: false, message: 'Authentication failed. User not found.' });
+    const form: IAuthUserFormArgs = {
+      userNameOrEmail: user.userNameOrEmail,
+      password: user.password.toString()
+    };
+    const userArgs: IAuthUserArgs = {
+      form,
+      authedUser
+    };
 
-    const token = jwt.sign(user, TOKEN_SECRET, {
-      expiresIn // expires in 60 seconds
-    });
+    const token = await userApp.getAuthToken(userArgs);
+    if (!token.user) return res.json({ success: false, message: 'Authentication failed. User not found.' });
 
     res.json({
       success: true,
       message: 'Enjoy your token!',
-      token,
+      token: token.authToken,
       expiresIn
     });
-  } catch (e) {
-    log(e);
-    res.send({ message: 'AUTH_CONTROLLER _|_' });
-  }
-}
-
-async function seedUsers(req: express.Request, res: express.Response) {
-  try {
-    // const result = await createConnection();
-    res.send({ message: 'Sedado' });
-  } catch (e) {
-    log(e);
-    res.send({ error: 'error in your request' });
-  }
+  } catch (e) { res.send({ message: e }); }
 }
 
 async function createUser(req: express.Request, res: express.Response) {
   try {
     const user = req.body;
 
-    const result = await UserApp.createUser(user);
+    const userApp = await getUserApp();
+
+    const authedUser = getAuthedBy();
+    const userArgs: ISaveUserArgs = {
+      userArgs: user,
+      authedUser
+    };
+
+    const result = await userApp.saveUser(userArgs);
 
     res.send({ message: result });
-  } catch (e) {
-    log(e);
-    res.send({ message: e });
-  }
+  } catch (e) { res.send({ message: e }); }
 }
 
-export {
-  seedUsers,
-  createUser,
-  authenticateUser,
-  verifyToken
-};
+export { createUser, authenticateUser, verifyToken };

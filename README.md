@@ -16,12 +16,12 @@ Demo Server was made with Polutz
 ## Use
 
 ### NPM Global packages
-```
+```bash
     npm install -g ts-node babel-cli
 ```
 
 ### Setup
-```
+```bash
     npm install   
     node run seed.js 
 ```
@@ -30,6 +30,6 @@ Demo Server was made with Polutz
 Make sure mongodb is running on port 27017
 
 ### Start
-```
+```bash
     npm start
 ```

@@ -15,17 +15,17 @@ demo-server é um doi feito com Polutz.
 ## Como usar
 
 ### NPM Global packages
-```
+```bash
     npm install -g ts-node babel-cli
 ```
 
 ### Instalação
-```
+```bash
     npm install   
     node run seed.js 
 ```
 
 ### Start
-```
+```bash
     npm start
 ```

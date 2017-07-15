@@ -11,7 +11,6 @@ var _DataAccess = require('../core/DataAccess');
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var mongoose = _DataAccess.mongooseInstance;
-// const mongooseConnection = mongooseConnection;
 
 var ProductSchema = function () {
     function ProductSchema() {
@@ -21,7 +20,7 @@ var ProductSchema = function () {
     _createClass(ProductSchema, null, [{
         key: 'schema',
         get: function get() {
-            var schema = mongoose.Schema({
+            return mongoose.Schema({
                 name: {
                     type: String,
                     required: true
@@ -35,7 +34,6 @@ var ProductSchema = function () {
                     required: true
                 }
             });
-            return schema;
         }
     }]);
 
