@@ -22,7 +22,7 @@ demo-server é um doi feito com Polutz.
 ### Instalação
 ```bash
     npm install   
-    node run seed.js 
+    node seed.js 
 ```
 
 ### Start

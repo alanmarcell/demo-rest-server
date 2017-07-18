@@ -1,17 +1,18 @@
 import { createApp } from '@alanmarcell/ptz-user-app';
 import { createUserRepository } from '@alanmarcell/ptz-user-repository';
+import R from 'ramda';
 import { DB_CONNECTION_STRING } from '../config/constants';
 import { log } from '../index';
 const expiresIn = 1000; // seconds
-const getAuthedBy = () => {
+const getAuthedBy = (ip, user) => {
     return {
-        ip: '',
+        ip,
         dtCreated: new Date(),
-        user: {
-            displayName: 'teste',
-            id: 'teste',
-            email: 'teste',
-            userName: 'teste'
+        user: user || {
+            displayName: 'Unknown User',
+            id: '0',
+            email: 'Unknown User',
+            userName: 'Unknown User'
         }
     };
 };
@@ -24,7 +25,7 @@ async function verifyToken(req, res, next) {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
     if (!token)
         return res.status(403).send({ success: false, message: 'No token provided.' });
-    const authedUser = getAuthedBy();
+    const authedUser = getAuthedBy(req.originalUrl);
     const userApp = await getUserApp();
     const verifyArgs = { token, authedUser };
     const toAuth = await userApp.verifyAuthToken(verifyArgs);
@@ -35,12 +36,11 @@ async function verifyToken(req, res, next) {
 }
 async function authenticateUser(req, res) {
     try {
-        const user = req.body;
         const userApp = await getUserApp();
-        const authedUser = getAuthedBy();
+        const authedUser = getAuthedBy(req.originalUrl);
         const form = {
-            userNameOrEmail: user.userNameOrEmail,
-            password: user.password.toString()
+            userNameOrEmail: req.body.userNameOrEmail,
+            password: req.body.password.toString()
         };
         const userArgs = {
             form,
@@ -60,21 +60,21 @@ async function authenticateUser(req, res) {
         res.send({ message: e });
     }
 }
-async function createUser(req, res) {
+const createUser = R.curry(async (req, res) => {
     try {
         const user = req.body;
         const userApp = await getUserApp();
-        const authedUser = getAuthedBy();
+        const authedUser = getAuthedBy(req.originalUrl);
         const userArgs = {
             userArgs: user,
             authedUser
         };
         const result = await userApp.saveUser(userArgs);
-        res.send({ message: result });
+        res.json({ success: true, message: result });
     }
     catch (e) {
         res.send({ message: e });
     }
-}
-export { createUser, authenticateUser, verifyToken };
+});
+export { createUser, authenticateUser, verifyToken, getUserApp };
 //# sourceMappingURL=UserController.js.map

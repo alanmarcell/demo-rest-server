@@ -1,7 +1,7 @@
 FROM angeloocana/alpine-nodejs-mongodb:0.3
 
 #create app directory
-ADD . /code
+COPY . /code
 WORKDIR /code
 
 #install app dependencies

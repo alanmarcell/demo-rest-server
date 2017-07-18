@@ -23,7 +23,7 @@ Demo Server was made with Polutz
 ### Setup
 ```bash
     npm install   
-    node run seed.js 
+    node seed.js 
 ```
 
 ### Pre-start

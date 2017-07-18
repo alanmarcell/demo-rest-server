@@ -7,7 +7,7 @@
   "typings": "src/index.ts",
   "scripts": {
     "lint": "tslint ./src/**/*.ts ./src/**/*.test.ts ./src/**/*.d.ts",
-    "js": "rimraf dist-esnext; tsc; rimraf dis; babel dist-esnext -d dist --presets es2015 --source-maps",
+    "js": "rimraf dist-esnext && tsc && rimraf dist && babel dist-esnext -d dist --presets es2015 --source-maps",
     "js:watch": "npm run js && tsc -w",
     "pretest": "npm-run-all --parallel js lint",
     "mocha": "mocha ./dist/**/*.test.js --require babel-polyfill",
@@ -55,8 +55,8 @@
     "typescript": "^2.4.1"
   },
   "dependencies": {
-    "@alanmarcell/ptz-user-app": "^2.0.0",
-    "@alanmarcell/ptz-user-domain": "^2.0.2",
+    "@alanmarcell/ptz-user-app": "^2.0.1",
+    "@alanmarcell/ptz-user-domain": "^2.0.3",
     "@alanmarcell/ptz-user-repository": "^0.0.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
@@ -68,7 +68,8 @@
     "mongoose": "^4.11.3",
     "morgan": "^1.8.2",
     "ptz-log-file": "^1.0.5",
-    "ramda": "^0.24.1"
+    "ramda": "^0.24.1",
+    "sinon": "^2.3.8"
   },
   "babel": {
     "presets": [

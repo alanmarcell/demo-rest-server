@@ -59,7 +59,6 @@ app.use((error: any, res: express.Response) => {
 
 (async () => {
   try {
-
     const server = await http.createServer(app);
 
     app.listen(PORT, async () => {
