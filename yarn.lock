@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@alanmarcell/ptz-core-app@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@alanmarcell/ptz-core-app/-/ptz-core-app-2.0.0.tgz#38a8fd339e65aabf7665d62f1d12411a038adb4c"
+"@alanmarcell/ptz-core-app@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@alanmarcell/ptz-core-app/-/ptz-core-app-2.0.2.tgz#d774a3fab73900655493f1dbfb2b0f19c34bea90"
   dependencies:
     "@alanmarcell/ptz-core-domain" "^2.0.4"
     "@types/mocha" "^2.2.41"
@@ -36,12 +36,12 @@
     mongodb "^2.2.30"
     ptz-log "^1.1.0"
 
-"@alanmarcell/ptz-user-app@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@alanmarcell/ptz-user-app/-/ptz-user-app-2.0.1.tgz#ab6cb2565bd94ad4ba1f6446a396522f88033eee"
+"@alanmarcell/ptz-user-app@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@alanmarcell/ptz-user-app/-/ptz-user-app-2.0.2.tgz#9fa9e9b951d5888a3a39920cf4463bed904d17df"
   dependencies:
-    "@alanmarcell/ptz-core-app" "^2.0.0"
-    "@alanmarcell/ptz-user-domain" "^2.0.2"
+    "@alanmarcell/ptz-core-app" "^2.0.2"
+    "@alanmarcell/ptz-user-domain" "^2.0.3"
     "@types/mocha" "^2.2.41"
     "@types/node" "^8.0.13"
     bcryptjs "^2.4.3"
@@ -50,17 +50,7 @@
     ptz-log "^1.1.0"
     ptz-validations "^3.0.1"
 
-"@alanmarcell/ptz-user-domain@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@alanmarcell/ptz-user-domain/-/ptz-user-domain-2.0.2.tgz#321486b2297bd90f56975ded1f7d199d7523b659"
-  dependencies:
-    "@alanmarcell/ptz-core-domain" "^2.0.4"
-    "@types/mocha" "^2.2.41"
-    "@types/node" "^8.0.13"
-    ptz-log "^1.1.0"
-    ptz-validations "^3.0.1"
-
-"@alanmarcell/ptz-user-domain@^2.0.3":
+"@alanmarcell/ptz-user-domain@^2.0.2", "@alanmarcell/ptz-user-domain@^2.0.3":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@alanmarcell/ptz-user-domain/-/ptz-user-domain-2.0.3.tgz#382e011300aaf93decd4eed5e094db45d031a9ca"
   dependencies:

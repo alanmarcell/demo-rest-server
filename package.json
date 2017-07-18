@@ -55,7 +55,7 @@
     "typescript": "^2.4.1"
   },
   "dependencies": {
-    "@alanmarcell/ptz-user-app": "^2.0.1",
+    "@alanmarcell/ptz-user-app": "^2.0.2",
     "@alanmarcell/ptz-user-domain": "^2.0.3",
     "@alanmarcell/ptz-user-repository": "^0.0.3",
     "bcryptjs": "^2.4.3",
