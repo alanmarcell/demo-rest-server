@@ -8,7 +8,7 @@ const userController = UserController;
 let req;
 // tslint:disable-next-line:prefer-const
 let res;
-Hy7uytoBW
+
 beforeEach(() => {
   res = { json: spy(), send: spy() };
 });
