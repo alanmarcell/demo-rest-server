@@ -39,53 +39,64 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 var log = exports.log = (0, _ptzLogFile2.default)({ dir: './logs' });
 var env = process.env.NODE_ENV || 'developement';
-var app = (0, _express2.default)();
-log('Starting New server...');
-var PORT = process.env.PORT || 3010;
-app.use((0, _cors2.default)());
-app.use(_bodyParser2.default.urlencoded({ extended: false }));
-app.use(_bodyParser2.default.json());
-app.use((0, _morgan2.default)('dev'));
-app.use('/api', new _Routes2.default().routes);
-var renderIndex = function renderIndex(req, res) {
-    res.json({
-        error: req.url,
-        message: '404'
-    });
-};
-app.get('/*', renderIndex);
-if (env === 'developement') {
-    app.use(function (error, req, res, next) {
-        res.status(error.status || 500);
-        res.json({
-            error: error,
-            message: req
-        });
-        next(res);
-    });
-}
-app.use(function (req, res, next) {
-    var error = new Error('Not Found' + req + res);
-    next(error);
-});
-app.use(function (error, res) {
-    res.status(error.status || 500);
-    res.json({
-        error: {},
-        message: error.message
-    });
-});
 _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-    var server;
+    var app, PORT, renderIndex, server;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
             switch (_context2.prev = _context2.next) {
                 case 0:
                     _context2.prev = 0;
-                    _context2.next = 3;
+                    app = (0, _express2.default)();
+
+                    log('Starting New server...');
+                    PORT = process.env.PORT || 3010;
+
+                    app.use((0, _cors2.default)());
+                    app.use(_bodyParser2.default.urlencoded({ extended: false }));
+                    app.use(_bodyParser2.default.json());
+                    app.use((0, _morgan2.default)('dev'));
+                    _context2.t0 = app;
+                    _context2.next = 11;
+                    return (0, _Routes2.default)();
+
+                case 11:
+                    _context2.t1 = _context2.sent;
+
+                    _context2.t0.use.call(_context2.t0, '/api', _context2.t1);
+
+                    renderIndex = function renderIndex(req, res) {
+                        res.json({
+                            error: req.url,
+                            message: '404'
+                        });
+                    };
+
+                    app.get('/*', renderIndex);
+                    if (env === 'developement') {
+                        app.use(function (error, req, res, next) {
+                            res.status(error.status || 500);
+                            res.json({
+                                error: error,
+                                message: req
+                            });
+                            next(res);
+                        });
+                    }
+                    app.use(function (req, res, next) {
+                        var error = new Error('Not Found' + req + res);
+                        next(error);
+                    });
+                    app.use(function (error, res) {
+                        res.status(error.status || 500);
+                        res.json({
+                            error: {},
+                            message: error.message
+                        });
+                    });
+                    _context2.next = 20;
                     return _http2.default.createServer(app);
 
-                case 3:
+                case 20:
                     server = _context2.sent;
 
                     app.listen(PORT, _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
@@ -106,21 +117,21 @@ _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
                             }
                         }, _callee, undefined);
                     })));
-                    _context2.next = 10;
+                    _context2.next = 27;
                     break;
 
-                case 7:
-                    _context2.prev = 7;
-                    _context2.t0 = _context2['catch'](0);
+                case 24:
+                    _context2.prev = 24;
+                    _context2.t2 = _context2['catch'](0);
 
-                    log(_context2.t0);
+                    log(_context2.t2);
 
-                case 10:
+                case 27:
                 case 'end':
                     return _context2.stop();
             }
         }
-    }, _callee2, undefined, [[0, 7]]);
+    }, _callee2, undefined, [[0, 24]]);
 }))();
 //# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map

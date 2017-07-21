@@ -4,14 +4,11 @@ import { getUserRoutes } from '../routes/UserRoutes';
 
 const app = express();
 
-class Routes {
+const routes = async () => {
+  app.use('/', await getUserRoutes());
+  app.use('/', new ProductRoutes().routes);
 
-  get routes() {
-    app.use('/', getUserRoutes());
-    app.use('/', new ProductRoutes().routes);
+  return app;
+};
 
-    return app;
-  }
-}
-
-export default Routes;
+export default routes;

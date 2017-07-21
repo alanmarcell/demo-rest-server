@@ -1,8 +1,5 @@
-import { createApp } from '@alanmarcell/ptz-user-app';
-import { createUserRepository } from '@alanmarcell/ptz-user-repository';
 import R from 'ramda';
-import { DB_CONNECTION_STRING } from '../config/constants';
-import { log } from '../index';
+// import { log } from '../index';
 const expiresIn = 1000; // seconds
 const getAuthedBy = (ip, user) => {
     return {
@@ -16,27 +13,22 @@ const getAuthedBy = (ip, user) => {
         }
     };
 };
-const getUserApp = async () => {
-    const userRepository = await createUserRepository(DB_CONNECTION_STRING, 'users');
-    return createApp({ userRepository, log });
-};
 // tslint:disable-next-line:max-line-length
-async function verifyToken(req, res, next) {
+const verifyToken = R.curry(async (verifyAuthToken, req, res, next) => {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
     if (!token)
         return res.status(403).send({ success: false, message: 'No token provided.' });
     const authedUser = getAuthedBy(req.originalUrl);
-    const userApp = await getUserApp();
     const verifyArgs = { token, authedUser };
-    const toAuth = await userApp.verifyAuthToken(verifyArgs);
+    const toAuth = await verifyAuthToken(verifyArgs);
     if (!toAuth)
         return res.json({ success: false, message: 'Failed to authenticate token.' });
     req.decoded = toAuth;
     next();
-}
-async function authenticateUser(req, res) {
+});
+// tslint:disable-next-line:max-line-length
+const authenticateUser = R.curry(async (getAuthToken, req, res) => {
     try {
-        const userApp = await getUserApp();
         const authedUser = getAuthedBy(req.originalUrl);
         const form = {
             userNameOrEmail: req.body.userNameOrEmail,
@@ -46,7 +38,7 @@ async function authenticateUser(req, res) {
             form,
             authedUser
         };
-        const token = await userApp.getAuthToken(userArgs);
+        const token = await getAuthToken(userArgs);
         if (!token.user)
             return res.json({ success: false, message: 'Authentication failed. User not found.' });
         res.json({
@@ -59,22 +51,22 @@ async function authenticateUser(req, res) {
     catch (e) {
         res.send({ message: e });
     }
-}
-const createUser = R.curry(async (req, res) => {
+});
+const createUser = R.curry(async (saveUser, req, res) => {
     try {
         const user = req.body;
-        const userApp = await getUserApp();
         const authedUser = getAuthedBy(req.originalUrl);
         const userArgs = {
             userArgs: user,
             authedUser
         };
-        const result = await userApp.saveUser(userArgs);
+        const result = await saveUser(userArgs);
         res.json({ success: true, message: result });
     }
     catch (e) {
+        console.log(e);
         res.send({ message: e });
     }
 });
-export { createUser, authenticateUser, verifyToken, getUserApp };
+export { createUser, authenticateUser, verifyToken };
 //# sourceMappingURL=UserController.js.map

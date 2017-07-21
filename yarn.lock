@@ -36,9 +36,9 @@
     mongodb "^2.2.30"
     ptz-log "^1.1.0"
 
-"@alanmarcell/ptz-user-app@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@alanmarcell/ptz-user-app/-/ptz-user-app-2.0.2.tgz#9fa9e9b951d5888a3a39920cf4463bed904d17df"
+"@alanmarcell/ptz-user-app@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@alanmarcell/ptz-user-app/-/ptz-user-app-2.0.4.tgz#94d8312948703de0deb77e43443c538b3a019a06"
   dependencies:
     "@alanmarcell/ptz-core-app" "^2.0.2"
     "@alanmarcell/ptz-user-domain" "^2.0.3"

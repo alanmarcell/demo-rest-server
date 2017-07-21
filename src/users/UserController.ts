@@ -1,14 +1,10 @@
-import { createApp } from '@alanmarcell/ptz-user-app';
 import {
-  IAuthUserArgs, IAuthUserFormArgs, ICreatedBy, ISaveUserArgs,
-  IUser, IUserForLog, IVerifyAuthTokenArgs
+  IAuthToken, IAuthUserArgs, IAuthUserFormArgs, ICreatedBy,
+  ISaveUserArgs, IUser, IUserForLog, IVerifyAuthTokenArgs
 } from '@alanmarcell/ptz-user-domain';
-import { createUserRepository } from '@alanmarcell/ptz-user-repository';
 import express from 'express';
 import R from 'ramda';
-import { DB_CONNECTION_STRING } from '../config/constants';
-import { log } from '../index';
-
+// import { log } from '../index';
 const expiresIn = 1000; // seconds
 
 const getAuthedBy = (ip: string, user?: IUserForLog): ICreatedBy => {
@@ -24,34 +20,28 @@ const getAuthedBy = (ip: string, user?: IUserForLog): ICreatedBy => {
   };
 };
 
-const getUserApp = async () => {
-  const userRepository = await createUserRepository(DB_CONNECTION_STRING, 'users');
-  return createApp({ userRepository, log });
-};
-
 // tslint:disable-next-line:max-line-length
-async function verifyToken(req: express.Request & { decoded: IUser }, res: express.Response, next: express.NextFunction) {
+const verifyToken = R.curry(async (verifyAuthToken, req: express.Request & { decoded: IUser }, res: express.Response, next: express.NextFunction) => {
   const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
   if (!token)
     return res.status(403).send({ success: false, message: 'No token provided.' });
 
   const authedUser = getAuthedBy(req.originalUrl);
-  const userApp = await getUserApp();
 
   const verifyArgs: IVerifyAuthTokenArgs = { token, authedUser };
 
-  const toAuth = await userApp.verifyAuthToken(verifyArgs);
+  const toAuth = await verifyAuthToken(verifyArgs);
 
   if (!toAuth) return res.json({ success: false, message: 'Failed to authenticate token.' });
 
   req.decoded = toAuth;
   next();
-}
+});
 
-async function authenticateUser(req: express.Request, res: express.Response) {
+// tslint:disable-next-line:max-line-length
+const authenticateUser = R.curry(async (getAuthToken: (a: IAuthUserArgs) => Promise<IAuthToken>, req: express.Request, res: express.Response) => {
   try {
-    const userApp = await getUserApp();
     const authedUser = getAuthedBy(req.originalUrl);
 
     const form: IAuthUserFormArgs = {
@@ -64,7 +54,7 @@ async function authenticateUser(req: express.Request, res: express.Response) {
       authedUser
     };
 
-    const token = await userApp.getAuthToken(userArgs);
+    const token = await getAuthToken(userArgs);
     if (!token.user) return res.json({ success: false, message: 'Authentication failed. User not found.' });
 
     res.json({
@@ -74,22 +64,25 @@ async function authenticateUser(req: express.Request, res: express.Response) {
       expiresIn
     });
   } catch (e) { res.send({ message: e }); }
-}
+});
 
-const createUser = R.curry(async (req: express.Request, res: express.Response) => {
+const createUser = R.curry(async (saveUser: (a: ISaveUserArgs) => Promise<IUser>,
+                                  req: express.Request, res: express.Response) => {
   try {
     const user = req.body;
 
-    const userApp = await getUserApp();
     const authedUser = getAuthedBy(req.originalUrl);
     const userArgs: ISaveUserArgs = {
       userArgs: user,
       authedUser
     };
-    const result = await userApp.saveUser(userArgs);
+    const result = await saveUser(userArgs);
 
     res.json({ success: true, message: result });
-  } catch (e) { res.send({ message: e }); }
+  } catch (e) {
+    console.log(e);
+    res.send({ message: e });
+  }
 });
 
-export { createUser, authenticateUser, verifyToken, getUserApp };
+export { createUser, authenticateUser, verifyToken };
