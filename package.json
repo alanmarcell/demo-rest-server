@@ -7,8 +7,11 @@
   "typings": "src/index.ts",
   "scripts": {
     "lint": "tslint ./src/**/*.ts ./src/**/*.test.ts ./src/**/*.d.ts",
-    "tsc": "tsc -v",
-    "js": "rimraf dist-esnext && tsc -p ./tsconfig.json && rimraf dist && babel dist-esnext -d dist --presets es2015 --source-maps",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "js": "rimraf dist-esnext && npm run tsc && npm run babel",
+    "babel":" rimraf dist && babel dist-esnext -d dist --presets es2015 --source-maps",
+    "babel:w":" rimraf dist && babel dist-esnext --watch -d dist --presets es2015 --source-maps",
     "pretest": "npm-run-all --parallel js lint",
     "mocha": "mocha ./dist/**/*.test.js --require babel-polyfill",
     "test": "nyc npm run mocha && nyc report --reporter=html --reporter=text-lcov > coverage.lcov && f() { EXIT=0; codecov --token=1d2b8efd-fdb1-40aa-8068-e6b159eed362 || exit $EXIT; }; f",
@@ -18,6 +21,7 @@
     "docs:build": "typedoc --out ./docs ./ --includeDeclarations --excludeExternals --exclude '**/*.test.ts' 'node_modules'",
     "docs": "npm run docs:build && opn ./docs/index.html",
     "start": "npm-run-all --parallel gensalt server",
+    "start:dev": "nodemon dist/index --exec babel-node --presets es2015",
     "server": "npm run js && babel-node --presets es2015 dist/index.js",
     "gensalt": "node gensalt.js"
   },
