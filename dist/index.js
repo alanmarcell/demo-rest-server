@@ -43,7 +43,7 @@ var log = exports.log = (0, _ptzLogFile2.default)({ dir: './logs' });
 var env = process.env.NODE_ENV || 'developement';
 var app = (0, _express2.default)();
 log('starting server');
-var PORT = process.env.PORT || 3010;
+var PORT = process.env.PORT || 3000;
 app.use((0, _cors2.default)());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 app.use(_bodyParser2.default.json());
@@ -77,7 +77,7 @@ app.use(function (error, res) {
         message: error.message
     });
 });
-_asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
     var server;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
@@ -90,7 +90,7 @@ _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
                 case 3:
                     server = _context2.sent;
 
-                    app.listen(PORT, _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+                    app.listen(PORT, _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
                         return regeneratorRuntime.wrap(function _callee$(_context) {
                             while (1) {
                                 switch (_context.prev = _context.next) {

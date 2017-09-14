@@ -7,7 +7,8 @@
   "typings": "src/index.ts",
   "scripts": {
     "lint": "tslint ./src/**/*.ts ./src/**/*.test.ts ./src/**/*.d.ts",
-    "js": "rimraf dist-esnext && tsc && rimraf dist && babel dist-esnext -d dist --presets es2015 --source-maps",
+    "tsc": "tsc -v",
+    "js": "rimraf dist-esnext && tsc -p ./tsconfig.json && rimraf dist && babel dist-esnext -d dist --presets es2015 --source-maps",
     "pretest": "npm-run-all --parallel js lint",
     "mocha": "mocha ./dist/**/*.test.js --require babel-polyfill",
     "test": "nyc npm run mocha && nyc report --reporter=html --reporter=text-lcov > coverage.lcov && f() { EXIT=0; codecov --token=1d2b8efd-fdb1-40aa-8068-e6b159eed362 || exit $EXIT; }; f",
@@ -45,11 +46,11 @@
     "rimraf": "^2.6.1",
     "tslint": "^5.0.0",
     "typedoc": "^0.6.0",
-    "typescript": "^2.2.2"
+    "typescript": "^2.5.2"
   },
   "dependencies": {
     "@types/express": "^4.0.36",
-    "@types/mongodb": "^2.2.6",
+    "@types/mongodb": "^2.2.11",
     "@types/mongoose": "^4.7.18",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",

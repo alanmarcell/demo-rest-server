@@ -12,4 +12,4 @@ interface IProductModel extends mongoose.Document {
 export {
   IProductBusiness,
   IProductModel
-}
+};

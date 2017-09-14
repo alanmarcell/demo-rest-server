@@ -14,7 +14,7 @@ const app = express();
 
 log('starting server');
 
-const PORT = process.env.PORT || 3010;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 

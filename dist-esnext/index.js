@@ -10,7 +10,7 @@ export const log = logFile({ dir: './logs' });
 const env = process.env.NODE_ENV || 'developement';
 const app = express();
 log('starting server');
-const PORT = process.env.PORT || 3010;
+const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
