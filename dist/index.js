@@ -43,6 +43,7 @@ var log = exports.log = (0, _ptzLogFile2.default)({ dir: './logs' });
 var env = process.env.NODE_ENV || 'developement';
 var app = (0, _express2.default)();
 log('starting server');
+log('starting server');
 var PORT = process.env.PORT || 3000;
 app.use((0, _cors2.default)());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));

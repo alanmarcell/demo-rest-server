@@ -37,7 +37,7 @@ var UserRoutes = function () {
         get: function get() {
             var userController = this.userController;
             var authenticationController = this.authenticationController;
-            router.post('/users', userController.create);
+            router.post('/auth/register', userController.create);
             router.use(authenticationController.verifyToken);
             router.get('/users', userController.retrieve);
             router.put('/users/:_id', userController.update);

@@ -26,9 +26,9 @@ var UserModel = function () {
             return this.userModel.password;
         }
     }, {
-        key: "admin",
+        key: "email",
         get: function get() {
-            return this.userModel.admin;
+            return this.userModel.email;
         }
     }]);
 

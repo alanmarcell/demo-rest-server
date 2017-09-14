@@ -16,7 +16,7 @@ class UserRoutes {
     const userController = this.userController;
     const authenticationController = this.authenticationController;
 
-    router.post('/users', userController.create);
+    router.post('/auth/register', userController.create);
     router.use(authenticationController.verifyToken);
     router.get('/users', userController.retrieve);
     router.put('/users/:_id', userController.update);

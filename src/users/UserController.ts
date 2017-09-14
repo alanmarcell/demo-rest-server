@@ -9,6 +9,7 @@ class UserController implements IBaseController<UserBusiness> {
   create(req: express.Request, res: express.Response): void {
     try {
       const user: IUserModel = req.body as IUserModel;
+      console.log('\n\n--- user  ---', user);
       const userBusiness = new UserBusiness();
       userBusiness.create(user, (error) => {
         if (error) res.send({ error: 'error' });

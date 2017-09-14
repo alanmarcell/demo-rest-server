@@ -15,8 +15,8 @@ class UserModel {
     return this.userModel.password;
   }
 
-  get admin(): boolean {
-    return this.userModel.admin;
+  get email(): string {
+    return this.userModel.email;
   }
 
 }

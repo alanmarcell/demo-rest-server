@@ -26,6 +26,7 @@ var UserController = function () {
         value: function create(req, res) {
             try {
                 var user = req.body;
+                console.log('\n\n--- user  ---', user);
                 var userBusiness = new _UserBusiness2.default();
                 userBusiness.create(user, function (error) {
                     if (error) res.send({ error: 'error' });else res.send({ success: 'success' });

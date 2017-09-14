@@ -8,8 +8,8 @@ class UserModel {
     get password() {
         return this.userModel.password;
     }
-    get admin() {
-        return this.userModel.admin;
+    get email() {
+        return this.userModel.email;
     }
 }
 Object.seal(UserModel);

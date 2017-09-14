@@ -13,6 +13,7 @@ const env: string = process.env.NODE_ENV || 'developement';
 const app = express();
 
 log('starting server');
+log('starting server');
 
 const PORT = process.env.PORT || 3000;
 

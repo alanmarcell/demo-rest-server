@@ -4,6 +4,7 @@ class UserController {
     create(req, res) {
         try {
             const user = req.body;
+            console.log('\n\n--- user  ---', user);
             const userBusiness = new UserBusiness();
             userBusiness.create(user, (error) => {
                 if (error)
