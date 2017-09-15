@@ -1,4 +1,5 @@
 import { log } from '../index';
+import AuthenticationController from './AuthenticationController';
 import UserBusiness from './UserBusiness';
 class UserController {
     create(req, res) {
@@ -9,8 +10,12 @@ class UserController {
             userBusiness.create(user, (error) => {
                 if (error)
                     res.send({ error: 'error' });
-                else
-                    res.send({ success: 'success' });
+                else {
+                    const authContoller = new AuthenticationController();
+                    console.log('\n\n--- aurh!!!  ---', user);
+                    authContoller.authenticateUser(req, res);
+                    // res.send({ success: 'success' });
+                }
             });
         }
         catch (e) {

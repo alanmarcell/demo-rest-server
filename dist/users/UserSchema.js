@@ -25,7 +25,7 @@ var UserSchema = function () {
     _createClass(UserSchema, null, [{
         key: 'schema',
         get: function get() {
-            var schema = mongoose.Schema({
+            var userSchema = mongoose.Schema({
                 name: {
                     type: String,
                     required: true
@@ -39,7 +39,7 @@ var UserSchema = function () {
                     required: true
                 }
             });
-            return schema;
+            return userSchema;
         }
     }]);
 

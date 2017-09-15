@@ -8,6 +8,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _index = require('../index');
 
+var _AuthenticationController = require('./AuthenticationController');
+
+var _AuthenticationController2 = _interopRequireDefault(_AuthenticationController);
+
 var _UserBusiness = require('./UserBusiness');
 
 var _UserBusiness2 = _interopRequireDefault(_UserBusiness);
@@ -29,7 +33,12 @@ var UserController = function () {
                 console.log('\n\n--- user  ---', user);
                 var userBusiness = new _UserBusiness2.default();
                 userBusiness.create(user, function (error) {
-                    if (error) res.send({ error: 'error' });else res.send({ success: 'success' });
+                    if (error) res.send({ error: 'error' });else {
+                        var authContoller = new _AuthenticationController2.default();
+                        console.log('\n\n--- aurh!!!  ---', user);
+                        authContoller.authenticateUser(req, res);
+                        // res.send({ success: 'success' });
+                    }
                 });
             } catch (e) {
                 (0, _index.log)(e);

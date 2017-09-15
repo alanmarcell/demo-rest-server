@@ -7,7 +7,7 @@ const mongooseConnection = DataAccess.mongooseConnection;
 class ProductSchema {
 
   static get schema() {
-    const schema = mongoose.Schema({
+    const prodSchema = mongoose.Schema({
       name: {
         type: String,
         required: true
@@ -21,7 +21,7 @@ class ProductSchema {
         required: true
       }
     });
-    return schema;
+    return prodSchema;
   }
 }
 

@@ -7,7 +7,7 @@ const mongooseConnection = DataAccess.mongooseConnection;
 class UserSchema {
 
   static get schema() {
-    const schema = mongoose.Schema({
+    const userSchema = mongoose.Schema({
       name: {
         type: String,
         required: true
@@ -21,7 +21,7 @@ class UserSchema {
         required: true
       }
     });
-    return schema;
+    return userSchema;
   }
 }
 

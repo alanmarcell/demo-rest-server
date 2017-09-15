@@ -25,7 +25,7 @@ var ProductSchema = function () {
     _createClass(ProductSchema, null, [{
         key: 'schema',
         get: function get() {
-            var schema = mongoose.Schema({
+            var prodSchema = mongoose.Schema({
                 name: {
                     type: String,
                     required: true
@@ -39,7 +39,7 @@ var ProductSchema = function () {
                     required: true
                 }
             });
-            return schema;
+            return prodSchema;
         }
     }]);
 

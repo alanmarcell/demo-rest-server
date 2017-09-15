@@ -9,8 +9,8 @@ export const {
 } = process.env;
 
 export const DB_CONNECTION_STRING: string = process.env.NODE_ENV === 'production'
-  ? process.env.PROD_URL
-  : process.env.DEV_URL;
+  ? process.env.PROD_URL || `localhost:27017`
+  : process.env.DEV_URL || `localhost:27017`;
 
 export const TOKEN_SECRET: string = PASSWORD_SALT;
 

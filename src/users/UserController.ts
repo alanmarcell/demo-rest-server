@@ -1,7 +1,8 @@
 import express from 'express';
 import IBaseController from '../core/IBaseController';
 import { log } from '../index';
-import {IUserModel} from './IUser';
+import AuthenticationController from './AuthenticationController';
+import { IUserModel } from './IUser';
 import UserBusiness from './UserBusiness';
 
 class UserController implements IBaseController<UserBusiness> {
@@ -13,7 +14,12 @@ class UserController implements IBaseController<UserBusiness> {
       const userBusiness = new UserBusiness();
       userBusiness.create(user, (error) => {
         if (error) res.send({ error: 'error' });
-        else res.send({ success: 'success' });
+        else {
+          const authContoller = new AuthenticationController();
+          console.log('\n\n--- aurh!!!  ---', user);
+          authContoller.authenticateUser(req, res);
+          // res.send({ success: 'success' });
+        }
       });
     } catch (e) {
       log(e);
